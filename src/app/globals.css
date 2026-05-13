@@ -52,3 +52,19 @@ body {
   font-family: var(--font-sans, system-ui, sans-serif);
   transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
 }
+
+@keyframes logo-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-2px) rotate(1deg);
+  }
+  75% {
+    transform: translateY(2px) rotate(-1deg);
+  }
+}
+
+.animate-logo-float {
+  animation: logo-float 4s ease-in-out infinite;
+}

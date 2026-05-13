@@ -6,10 +6,35 @@ import * as THREE from 'three'
 
 const PARTICLE_COUNT = 800
 
+function createCircleTexture(): THREE.Texture {
+  const canvas = document.createElement('canvas')
+  canvas.width = 64
+  canvas.height = 64
+  const ctx = canvas.getContext('2d')!
+  const center = 32
+  const radius = 30
+
+  const gradient = ctx.createRadialGradient(center, center, 0, center, center, radius)
+  gradient.addColorStop(0, 'rgba(255, 255, 255, 1)')
+  gradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.8)')
+  gradient.addColorStop(1, 'rgba(255, 255, 255, 0)')
+
+  ctx.fillStyle = gradient
+  ctx.beginPath()
+  ctx.arc(center, center, radius, 0, Math.PI * 2)
+  ctx.fill()
+
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.needsUpdate = true
+  return texture
+}
+
 export function ParticleField(): React.ReactNode {
   const pointsRef = useRef<THREE.Points>(null)
   const mouseRef = useRef({ x: 0, y: 0 })
   const { viewport } = useThree()
+
+  const circleTexture = useMemo(() => createCircleTexture(), [])
 
   const [positions, velocities] = useMemo(() => {
     const pos = new Float32Array(PARTICLE_COUNT * 3)
@@ -31,12 +56,17 @@ export function ParticleField(): React.ReactNode {
 
   const colors = useMemo(() => {
     const cols = new Float32Array(PARTICLE_COUNT * 3)
+    // Planet-inspired colors
     const palette = [
-      [0.21, 0.2, 1.0],    // gradient1-ish blue
-      [0.17, 0.2, 0.7],    // gradient2-ish
-      [0.04, 0.53, 0.58],  // gradient3-ish teal
-      [0.18, 0.58, 0.74],  // title1 blue
-      [0.6, 0.85, 0.9],    // title2 light blue
+      [0.76, 0.44, 0.2],   // Mars orange
+      [0.85, 0.65, 0.35],  // Saturn gold
+      [0.2, 0.4, 0.8],     // Neptune blue
+      [0.55, 0.27, 0.07],  // Jupiter brown
+      [0.4, 0.7, 0.4],     // Earth green
+      [0.9, 0.85, 0.7],    // Venus cream
+      [0.6, 0.3, 0.3],     // Mars red
+      [0.3, 0.5, 0.9],     // Uranus blue
+      [0.8, 0.75, 0.5],    // Titan sandy
     ]
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
@@ -114,10 +144,11 @@ export function ParticleField(): React.ReactNode {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.04}
+        size={0.06}
+        map={circleTexture}
         vertexColors
         transparent
-        opacity={0.7}
+        opacity={0.85}
         sizeAttenuation
         depthWrite={false}
       />

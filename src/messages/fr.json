@@ -32,10 +32,11 @@
   "skills": {
     "heading": "Compétences & Technologies",
     "frontend": "Frontend",
-    "backend": "Backend & APIs",
+    "backend": "Backend & Langages",
     "databases": "Bases de Données",
     "cloud": "Cloud & DevOps",
-    "tools": "Outils & Autres"
+    "ai": "IA & Outils Agentiques",
+    "tools": "Outils & Workflow"
   },
   "contact": {
     "heading": "Me Contacter",

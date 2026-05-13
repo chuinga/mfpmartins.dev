@@ -1,16 +1,21 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { NavLinks } from './NavLinks'
 import { SocialIcons } from './SocialIcons'
 
 export function MobileMenu(): React.ReactNode {
   const [isOpen, setIsOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
-      // Trap focus: close on Escape
       function handleKeyDown(e: KeyboardEvent): void {
         if (e.key === 'Escape') setIsOpen(false)
       }
@@ -24,11 +29,26 @@ export function MobileMenu(): React.ReactNode {
     }
   }, [isOpen])
 
+  const overlay =
+    isOpen && mounted
+      ? createPortal(
+          <div
+            className="fixed inset-0 top-16 flex flex-col items-center gap-8 py-12 px-6 overflow-y-auto"
+            style={{ backgroundColor: 'var(--background)', zIndex: 9999 }}
+          >
+            <NavLinks onLinkClick={() => setIsOpen(false)} />
+            <SocialIcons />
+          </div>,
+          document.body,
+        )
+      : null
+
   return (
     <div className="md:hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-10 h-10 flex items-center justify-center text-foreground hover:text-title2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-title2"
+        className="relative w-10 h-10 flex items-center justify-center text-foreground hover:text-title2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-title2"
+        style={{ zIndex: isOpen ? 10000 : undefined }}
         aria-label={isOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={isOpen}
       >
@@ -59,15 +79,7 @@ export function MobileMenu(): React.ReactNode {
           </svg>
         )}
       </button>
-
-      {isOpen && (
-        <div className="fixed inset-0 top-16 z-50 bg-background/95 backdrop-blur-sm">
-          <div className="flex flex-col items-center justify-center gap-8 h-full">
-            <NavLinks onLinkClick={() => setIsOpen(false)} />
-            <SocialIcons />
-          </div>
-        </div>
-      )}
+      {overlay}
     </div>
   )
 }

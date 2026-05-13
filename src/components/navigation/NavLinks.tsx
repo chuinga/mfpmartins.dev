@@ -22,7 +22,7 @@ export function NavLinks({ onLinkClick }: NavLinksProps): React.ReactNode {
 
   return (
     <nav aria-label="Main navigation">
-      <ul className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+      <ul className="flex flex-col md:flex-row items-center gap-8 md:gap-8">
         {links.map(({ href, key }) => {
           const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href)
           return (
@@ -30,7 +30,7 @@ export function NavLinks({ onLinkClick }: NavLinksProps): React.ReactNode {
               <Link
                 href={href}
                 onClick={onLinkClick}
-                className={`text-sm font-medium transition-colors hover:text-title2 ${
+                className={`text-lg md:text-sm font-medium transition-colors hover:text-title2 ${
                   isActive ? 'text-title2' : 'text-foreground'
                 }`}
               >

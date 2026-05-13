@@ -32,8 +32,10 @@
   "skills": {
     "heading": "Competências & Tecnologias",
     "frontend": "Frontend",
-    "tools": "Ferramentas",
-    "other": "Outros"
+    "backend": "Backend & APIs",
+    "databases": "Bases de Dados",
+    "cloud": "Cloud & DevOps",
+    "tools": "Ferramentas & Outros"
   },
   "contact": {
     "heading": "Entre em Contacto",

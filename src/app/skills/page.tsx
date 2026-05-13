@@ -8,9 +8,12 @@ import {
   FaCss3Alt,
   FaGitAlt,
   FaGithub,
-  FaNpm,
-  FaFigma,
+  FaDocker,
   FaAws,
+  FaNodeJs,
+  FaPython,
+  FaJava,
+  FaLinux,
 } from 'react-icons/fa'
 import {
   SiNextdotjs,
@@ -19,8 +22,13 @@ import {
   SiTailwindcss,
   SiThreedotjs,
   SiVite,
+  SiMongodb,
+  SiPostgresql,
+  SiTerraform,
+  SiExpress,
+  SiPrisma,
 } from 'react-icons/si'
-import { MdAccessibility, MdDevices, MdSearch } from 'react-icons/md'
+import { MdAccessibility, MdDevices, MdCloud, MdSmartToy, MdTerminal, MdStorage } from 'react-icons/md'
 import { type ReactNode } from 'react'
 
 interface Skill {
@@ -44,7 +52,38 @@ const skillCategories: SkillCategory[] = [
       { name: 'HTML5', icon: <FaHtml5 className="w-8 h-8" /> },
       { name: 'CSS3', icon: <FaCss3Alt className="w-8 h-8" /> },
       { name: 'Tailwind CSS', icon: <SiTailwindcss className="w-8 h-8" /> },
+      { name: 'Vite', icon: <SiVite className="w-8 h-8" /> },
       { name: 'Three.js', icon: <SiThreedotjs className="w-8 h-8" /> },
+    ],
+  },
+  {
+    categoryKey: 'skills.backend',
+    skills: [
+      { name: 'Node.js', icon: <FaNodeJs className="w-8 h-8" /> },
+      { name: 'Express.js', icon: <SiExpress className="w-8 h-8" /> },
+      { name: 'Python', icon: <FaPython className="w-8 h-8" /> },
+      { name: 'Java', icon: <FaJava className="w-8 h-8" /> },
+      { name: 'REST APIs', icon: <MdCloud className="w-8 h-8" /> },
+    ],
+  },
+  {
+    categoryKey: 'skills.databases',
+    skills: [
+      { name: 'PostgreSQL', icon: <SiPostgresql className="w-8 h-8" /> },
+      { name: 'MongoDB', icon: <SiMongodb className="w-8 h-8" /> },
+      { name: 'DynamoDB', icon: <MdStorage className="w-8 h-8" /> },
+      { name: 'Prisma', icon: <SiPrisma className="w-8 h-8" /> },
+    ],
+  },
+  {
+    categoryKey: 'skills.cloud',
+    skills: [
+      { name: 'AWS', icon: <FaAws className="w-8 h-8" /> },
+      { name: 'Docker', icon: <FaDocker className="w-8 h-8" /> },
+      { name: 'Terraform', icon: <SiTerraform className="w-8 h-8" /> },
+      { name: 'CI/CD', icon: <MdDevices className="w-8 h-8" /> },
+      { name: 'Linux', icon: <FaLinux className="w-8 h-8" /> },
+      { name: 'Bash/Zsh', icon: <MdTerminal className="w-8 h-8" /> },
     ],
   },
   {
@@ -52,18 +91,9 @@ const skillCategories: SkillCategory[] = [
     skills: [
       { name: 'Git', icon: <FaGitAlt className="w-8 h-8" /> },
       { name: 'GitHub', icon: <FaGithub className="w-8 h-8" /> },
-      { name: 'Vite', icon: <SiVite className="w-8 h-8" /> },
-      { name: 'npm', icon: <FaNpm className="w-8 h-8" /> },
-      { name: 'Figma', icon: <FaFigma className="w-8 h-8" /> },
-    ],
-  },
-  {
-    categoryKey: 'skills.other',
-    skills: [
-      { name: 'Responsive Design', icon: <MdDevices className="w-8 h-8" /> },
-      { name: 'SEO', icon: <MdSearch className="w-8 h-8" /> },
+      { name: 'AI Tooling', icon: <MdSmartToy className="w-8 h-8" /> },
       { name: 'Accessibility', icon: <MdAccessibility className="w-8 h-8" /> },
-      { name: 'AWS', icon: <FaAws className="w-8 h-8" /> },
+      { name: 'Responsive Design', icon: <MdDevices className="w-8 h-8" /> },
     ],
   },
 ]
@@ -72,7 +102,7 @@ export default function SkillsPage(): ReactNode {
   const { t } = useTranslations()
 
   return (
-    <div className="mx-auto max-w-4xl px-4 sm:px-6 py-12">
+    <div className="mx-auto max-w-5xl px-4 sm:px-6 py-12">
       <AnimatedSection>
         <h1 className="text-title2 text-3xl font-bold mb-10">{t('skills.heading')}</h1>
       </AnimatedSection>
@@ -83,7 +113,7 @@ export default function SkillsPage(): ReactNode {
             <h2 className="text-title1 text-xl font-semibold mb-4">
               {t(category.categoryKey)}
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {category.skills.map((skill) => (
                 <div
                   key={skill.name}

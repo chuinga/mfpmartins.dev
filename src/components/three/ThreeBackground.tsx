@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { ParticleField } from './ParticleField'
 
@@ -18,15 +18,24 @@ function isWebGLAvailable(): boolean {
 
 export function ThreeBackground(): React.ReactNode {
   const [supportsWebGL, setSupportsWebGL] = useState<boolean | null>(null)
+  const [isVisible, setIsVisible] = useState(true)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     setSupportsWebGL(isWebGLAvailable())
   }, [])
 
-  // Still loading check
+  // Pause rendering when tab is not visible
+  useEffect(() => {
+    function handleVisibilityChange(): void {
+      setIsVisible(!document.hidden)
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }, [])
+
   if (supportsWebGL === null) return null
 
-  // Fallback gradient for non-WebGL devices
   if (!supportsWebGL) {
     return (
       <div
@@ -43,9 +52,10 @@ export function ThreeBackground(): React.ReactNode {
   return (
     <div className="fixed inset-0 -z-10">
       <Canvas
+        ref={canvasRef}
         camera={{ position: [0, 0, 5], fov: 75 }}
         dpr={[1, 1.5]}
-        frameloop="always"
+        frameloop={isVisible ? 'always' : 'never'}
         style={{ background: 'transparent' }}
       >
         <Suspense fallback={null}>

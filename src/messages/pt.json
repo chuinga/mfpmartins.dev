@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "home": "Início",
+    "projects": "Projetos",
+    "about": "Sobre",
+    "skills": "Competências",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Olá, o meu nome é",
+    "name": "Miguel Martins",
+    "title": "Eu crio coisas para a web...",
+    "description": "Sou um programador full-stack baseado perto de Lisboa, Portugal. O meu entusiasmo reside na programação, downhill biking e na criação de novos sons. Movido por uma curiosidade insaciável, estou comprometido em expandir constantemente o meu conhecimento e aperfeiçoar as minhas competências, sempre com atenção ao detalhe."
+  },
+  "projects": {
+    "heading": "Projetos",
+    "visitSite": "Visitar Site",
+    "github": "GitHub",
+    "technologies": "Tecnologias",
+    "gravity_description": "Um jogo onde os jogadores saltam sobre obstáculos para ganhar pontos e tentam apanhar snacks para ganhar vidas e também pontos. O jogo termina quando as vidas acabam ou quando se atinge uma pontuação de 100 pontos.",
+    "pawsitivehomes_description": "Uma base de dados online e pesquisável de animais que precisam de um lar. Somos um refúgio de esperança e alegria para os nossos amigos peludos.",
+    "groovegrid_description": "Uma aplicação musical que permite criar uma experiência personalizada adaptada ao seu gosto musical.",
+    "setubal_description": "Um website com as minhas atrações favoritas em Setúbal: a Arrábida, as suas praias e a sua gastronomia."
+  },
+  "about": {
+    "heading": "Sobre Mim",
+    "bio": "Sou um programador full-stack baseado perto de Lisboa, Portugal. O meu entusiasmo reside na programação, downhill biking e na criação de novos sons. Movido por uma curiosidade insaciável, estou comprometido em expandir constantemente o meu conhecimento e aperfeiçoar as minhas competências, sempre com atenção ao detalhe.",
+    "location": "Perto de Lisboa, Portugal",
+    "role": "Programador Full-Stack"
+  },
+  "skills": {
+    "heading": "Competências & Tecnologias",
+    "frontend": "Frontend",
+    "tools": "Ferramentas",
+    "other": "Outros"
+  },
+  "contact": {
+    "heading": "Entre em Contacto",
+    "cta": "Estou sempre aberto a novas oportunidades e colaborações. Se tem uma pergunta ou apenas quer dizer olá, não hesite em contactar-me!",
+    "email": "Enviar Email"
+  },
+  "footer": {
+    "copyright": "© {year} mfpmartins.dev"
+  },
+  "notFound": {
+    "message": "Parece que caiu num buraco negro. Vamos levá-lo de volta à",
+    "link": "página inicial"
+  }
+}

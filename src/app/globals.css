@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+
+/* Light theme (default) */
+:root {
+  --background: #dbdbdb;
+  --foreground: #464444;
+  --title1: #0400df;
+  --title2: #007ce2;
+  --description: #464444;
+  --gradient1: #360033;
+  --gradient2: #2b32b2;
+  --gradient3: #0b8793;
+  --card-bg: #ffffff;
+  --card-border: #e5e5e5;
+  --nav-bg: rgba(219, 219, 219, 0.8);
+}
+
+/* Dark theme */
+[data-theme='dark'] {
+  --background: #000000;
+  --foreground: #c0c0c0;
+  --title1: #2f94bc;
+  --title2: #9adae5;
+  --description: #c0c0c0;
+  --gradient1: #5433ff;
+  --gradient2: #20bdff;
+  --gradient3: #a5fecb;
+  --card-bg: #111111;
+  --card-border: #2a2a2a;
+  --nav-bg: rgba(0, 0, 0, 0.8);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-title1: var(--title1);
+  --color-title2: var(--title2);
+  --color-description: var(--description);
+  --color-gradient1: var(--gradient1);
+  --color-gradient2: var(--gradient2);
+  --color-gradient3: var(--gradient3);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-nav-bg: var(--nav-bg);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans, system-ui, sans-serif);
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+}

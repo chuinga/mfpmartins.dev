@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "about": "Sobre mí",
+    "skills": "Habilidades",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Hola, mi nombre es",
+    "name": "Miguel Martins",
+    "title": "Creo cosas para la web...",
+    "description": "Soy un desarrollador full-stack basado cerca de Lisboa, Portugal. Mi entusiasmo reside en la programación, el downhill biking y la creación de nuevos sonidos. Impulsado por una curiosidad insaciable, estoy comprometido a expandir constantemente mis conocimientos y perfeccionar mis habilidades, siempre con atención al detalle."
+  },
+  "projects": {
+    "heading": "Proyectos",
+    "visitSite": "Visitar Sitio",
+    "github": "GitHub",
+    "technologies": "Tecnologías",
+    "gravity_description": "Un juego donde los jugadores saltan sobre obstáculos para ganar puntos e intentan atrapar snacks para ganar vidas y también puntos. El juego termina cuando se acaban las vidas o cuando se alcanza una puntuación de 100 puntos.",
+    "pawsitivehomes_description": "Una base de datos en línea y buscable de animales que necesitan un hogar. Somos un refugio de esperanza y alegría para nuestros amigos peludos.",
+    "groovegrid_description": "Una aplicación musical que te permite crear una experiencia personalizada adaptada a tu gusto musical.",
+    "setubal_description": "Un sitio web con mis atracciones favoritas en Setúbal: Arrábida, sus playas y su gastronomía."
+  },
+  "about": {
+    "heading": "Sobre Mí",
+    "bio": "Soy un desarrollador full-stack basado cerca de Lisboa, Portugal. Mi entusiasmo reside en la programación, el downhill biking y la creación de nuevos sonidos. Impulsado por una curiosidad insaciable, estoy comprometido a expandir constantemente mis conocimientos y perfeccionar mis habilidades, siempre con atención al detalle.",
+    "location": "Cerca de Lisboa, Portugal",
+    "role": "Desarrollador Full-Stack"
+  },
+  "skills": {
+    "heading": "Habilidades & Tecnologías",
+    "frontend": "Frontend",
+    "tools": "Herramientas",
+    "other": "Otros"
+  },
+  "contact": {
+    "heading": "Contacto",
+    "cta": "Siempre estoy abierto a nuevas oportunidades y colaboraciones. Si tienes una pregunta o solo quieres saludar, ¡no dudes en contactarme!",
+    "email": "Enviar Email"
+  },
+  "footer": {
+    "copyright": "© {year} mfpmartins.dev"
+  },
+  "notFound": {
+    "message": "Parece que has caído en un agujero negro. Vamos a llevarte de vuelta a la",
+    "link": "página de inicio"
+  }
+}

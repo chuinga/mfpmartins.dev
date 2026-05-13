@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from 'next-themes'
 import { type ReactNode } from 'react'
+import { LocaleProvider } from '@/lib/LocaleContext'
 
 interface ProvidersProps {
   children: ReactNode
@@ -10,7 +11,7 @@ interface ProvidersProps {
 export function Providers({ children }: ProvidersProps): ReactNode {
   return (
     <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem storageKey="theme">
-      {children}
+      <LocaleProvider>{children}</LocaleProvider>
     </ThemeProvider>
   )
 }

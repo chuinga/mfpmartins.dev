@@ -1,17 +1,25 @@
-export default function Home() {
+'use client'
+
+import { useTranslations } from '@/lib/LocaleContext'
+import { AnimatedSection } from '@/components/ui/AnimatedSection'
+
+export default function Home(): React.ReactNode {
+  const { t } = useTranslations()
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center px-6">
-      <div className="max-w-2xl">
-        <p className="text-title1 text-lg">Hi, my name is</p>
-        <h1 className="text-title2 text-5xl font-bold mt-2">Miguel Martins</h1>
-        <h2 className="text-description text-2xl mt-4">I create stuff for the web...</h2>
-        <p className="text-description mt-4 leading-relaxed">
-          I am a full-stack developer based near Lisbon, Portugal. My enthusiasm lies in
-          programming, downhill biking, and creating new sounds. Driven by an insatiable curiosity, I
-          am committed to constantly expanding my knowledge and perfecting my skills, always with
-          attention to detail.
-        </p>
-      </div>
-    </main>
+    <div className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4 sm:px-6">
+      <AnimatedSection className="max-w-2xl w-full relative pl-6">
+        <div
+          className="absolute left-0 top-0 bottom-0 w-1 rounded-full"
+          style={{
+            background: `linear-gradient(to bottom, var(--gradient1), var(--gradient2), var(--gradient3))`,
+          }}
+        />
+        <p className="text-title1 text-lg">{t('hero.greeting')}</p>
+        <h1 className="text-title2 text-4xl sm:text-5xl font-bold mt-2">{t('hero.name')}</h1>
+        <h2 className="text-description text-xl sm:text-2xl mt-4">{t('hero.title')}</h2>
+        <p className="text-description mt-4 leading-relaxed">{t('hero.description')}</p>
+      </AnimatedSection>
+    </div>
   )
 }

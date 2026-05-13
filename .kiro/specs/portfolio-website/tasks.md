@@ -119,48 +119,48 @@
 - [x] Apply AnimatedSection to all content sections across pages
 
 ## Task 14: Responsive Design Polish
-- [ ] Verify mobile layout (320px+): stacked content, hamburger nav, hidden sidebar
-- [ ] Verify tablet layout (768px+): sidebar visible, horizontal nav
-- [ ] Verify desktop layout (1024px+): full layout with comfortable spacing
-- [ ] Ensure minimum 16px body text and 44x44px touch targets
-- [ ] Ensure images scale within containers without overflow
-- [ ] Test all breakpoints for navigation, projects, about, skills, contact pages
+- [x] Verify mobile layout (320px+): stacked content, hamburger nav, hidden sidebar
+- [x] Verify tablet layout (768px+): sidebar visible, horizontal nav
+- [x] Verify desktop layout (1024px+): full layout with comfortable spacing
+- [x] Ensure minimum 16px body text and 44x44px touch targets
+- [x] Ensure images scale within containers without overflow
+- [x] Test all breakpoints for navigation, projects, about, skills, contact pages
 
 ## Task 15: SEO and Performance Optimization
-- [ ] Add metadata to root layout (title, description, Open Graph tags)
-- [ ] Add page-specific metadata to each route (title, description)
-- [ ] Create public/robots.txt allowing crawling
-- [ ] Create public/sitemap.xml listing all public pages
-- [ ] Verify all images use next/image with proper alt text
-- [ ] Ensure static generation is used for all pages (no dynamic server data)
+- [x] Add metadata to root layout (title, description, Open Graph tags)
+- [x] Add page-specific metadata to each route (title, description)
+- [x] Create public/robots.txt allowing crawling
+- [x] Create public/sitemap.xml listing all public pages
+- [x] Verify all images use next/image with proper alt text
+- [x] Ensure static generation is used for all pages (no dynamic server data)
 - [ ] Run Lighthouse audit and address any issues below 90 score
 
 ## Task 16: Accessibility Audit
-- [ ] Verify all images have descriptive alt text (decorative images use alt="")
-- [ ] Verify all interactive elements are keyboard-reachable with visible focus indicators
-- [ ] Verify color contrast ratios (4.5:1 normal text, 3:1 large text) in both themes
-- [ ] Verify ARIA labels on: social icons, theme toggle, hamburger menu, language selector
-- [ ] Add ARIA live region for theme/language change announcements
-- [ ] Test keyboard navigation flow through entire site
-- [ ] Verify focus trap in mobile menu overlay
+- [x] Verify all images have descriptive alt text (decorative images use alt="")
+- [x] Verify all interactive elements are keyboard-reachable with visible focus indicators
+- [x] Verify color contrast ratios (4.5:1 normal text, 3:1 large text) in both themes
+- [x] Verify ARIA labels on: social icons, theme toggle, hamburger menu, language selector
+- [x] Add ARIA live region for theme/language change announcements
+- [x] Test keyboard navigation flow through entire site
+- [x] Verify focus trap in mobile menu overlay
 
 ## Task 17: AWS Amplify Deployment Setup
-- [ ] Create amplify.yml build configuration file
-- [ ] Configure build command (npm ci + npm run build)
-- [ ] Document Amplify setup steps (connect GitHub repo, set branch, configure domain)
-- [ ] Document custom domain setup (mfpmartins.dev + www redirect)
-- [ ] Document ACM certificate provisioning steps
-- [ ] Add environment variable documentation (if any needed in future)
-- [ ] Verify build output is compatible with Amplify hosting
+- [x] Create amplify.yml build configuration file
+- [x] Configure build command (npm ci + npm run build)
+- [x] Document Amplify setup steps (connect GitHub repo, set branch, configure domain)
+- [x] Document custom domain setup (mfpmartins.dev + www redirect)
+- [x] Document ACM certificate provisioning steps
+- [x] Add environment variable documentation (if any needed in future)
+- [x] Verify build output is compatible with Amplify hosting
 
 ## Task 18: Final Integration and Testing
-- [ ] Verify all pages render correctly in both themes
-- [ ] Verify all translations work across all 4 languages on all pages
-- [ ] Verify Three.js background renders and responds to mouse
-- [ ] Verify WebGL fallback works when WebGL is disabled
-- [ ] Verify all external links open correctly (LinkedIn, GitHub, email)
-- [ ] Verify 404 page displays for invalid routes
-- [ ] Verify responsive behavior across mobile/tablet/desktop
-- [ ] Verify animations respect prefers-reduced-motion
+- [x] Verify all pages render correctly in both themes
+- [x] Verify all translations work across all 4 languages on all pages
+- [x] Verify Three.js background renders and responds to mouse
+- [x] Verify WebGL fallback works when WebGL is disabled
+- [x] Verify all external links open correctly (LinkedIn, GitHub, email)
+- [x] Verify 404 page displays for invalid routes
+- [x] Verify responsive behavior across mobile/tablet/desktop
+- [x] Verify animations respect prefers-reduced-motion
 - [ ] Run final Lighthouse audit (Performance 90+, Accessibility 90+)
-- [ ] Commit and push to GitHub repository
+- [x] Commit and push to GitHub repository

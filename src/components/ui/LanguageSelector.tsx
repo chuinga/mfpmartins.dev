@@ -29,6 +29,8 @@ export function LanguageSelector({ onLocaleChange }: LanguageSelectorProps): Rea
     setCurrentLocale(locale)
     localStorage.setItem('locale', locale)
     onLocaleChange?.(locale)
+    const announcer = document.getElementById('announcer')
+    if (announcer) announcer.textContent = `Language changed to ${flagLabels[locale]}`
   }
 
   return (

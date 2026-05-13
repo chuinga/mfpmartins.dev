@@ -26,7 +26,12 @@ export function ThemeToggle(): React.ReactNode {
 
   return (
     <button
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      onClick={() => {
+        const newTheme = isDark ? 'light' : 'dark'
+        setTheme(newTheme)
+        const announcer = document.getElementById('announcer')
+        if (announcer) announcer.textContent = `Theme changed to ${newTheme} mode`
+      }}
       className="w-10 h-10 rounded-full flex items-center justify-center bg-card-bg border border-card-border transition-colors hover:border-title2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-title2"
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
     >

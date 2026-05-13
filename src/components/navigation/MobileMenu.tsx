@@ -10,10 +10,16 @@ export function MobileMenu(): React.ReactNode {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
+      // Trap focus: close on Escape
+      function handleKeyDown(e: KeyboardEvent): void {
+        if (e.key === 'Escape') setIsOpen(false)
+      }
+      document.addEventListener('keydown', handleKeyDown)
+      return () => {
+        document.body.style.overflow = ''
+        document.removeEventListener('keydown', handleKeyDown)
+      }
     } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
       document.body.style.overflow = ''
     }
   }, [isOpen])

@@ -1,18 +1,12 @@
-'use client'
+import type { Metadata } from 'next'
+import { ProjectsLayoutClient } from './ProjectsLayoutClient'
 
-import { ProjectSidebar } from '@/components/projects/ProjectSidebar'
+export const metadata: Metadata = {
+  title: 'Projects',
+  description:
+    'Portfolio of web development projects by Miguel Martins — games, music apps, and more.',
+}
 
-export default function ProjectsLayout({
-  children,
-}: {
-  children: React.ReactNode
-}): React.ReactNode {
-  return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
-      <div className="flex flex-col md:flex-row gap-8">
-        <ProjectSidebar />
-        {children}
-      </div>
-    </div>
-  )
+export default function ProjectsLayout({ children }: { children: React.ReactNode }) {
+  return <ProjectsLayoutClient>{children}</ProjectsLayoutClient>
 }

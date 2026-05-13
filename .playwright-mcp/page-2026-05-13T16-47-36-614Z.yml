@@ -1,0 +1,74 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e6]:
+    - generic [ref=e7]:
+      - link "Home" [ref=e8] [cursor=pointer]:
+        - /url: /
+        - img "mfpmartins.dev logo" [ref=e11]
+      - button "Open menu" [ref=e13]:
+        - img [ref=e14]
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - complementary [ref=e18]:
+        - heading "Projetos" [level=2] [ref=e19]
+        - list [ref=e20]:
+          - listitem [ref=e21]:
+            - link "mfpmartins.dev" [ref=e22] [cursor=pointer]:
+              - /url: /projects/mfpmartins-dev
+          - listitem [ref=e23]:
+            - link "Setúbal" [ref=e24] [cursor=pointer]:
+              - /url: /projects/setubal
+          - listitem [ref=e25]:
+            - link "GrooveGrid" [ref=e26] [cursor=pointer]:
+              - /url: /projects/groovegrid
+          - listitem [ref=e27]:
+            - link "Pawsitive Homes" [ref=e28] [cursor=pointer]:
+              - /url: /projects/pawsitivehomes
+          - listitem [ref=e29]:
+            - link "Gravity" [ref=e30] [cursor=pointer]:
+              - /url: /projects/gravity
+      - generic [ref=e31]:
+        - heading "Gravity" [level=2] [ref=e32]
+        - paragraph [ref=e33]: Um jogo onde os jogadores saltam sobre obstáculos para ganhar pontos e tentam apanhar snacks para ganhar vidas e também pontos. O jogo termina quando as vidas acabam ou quando se atinge uma pontuação de 100 pontos.
+        - generic [ref=e34]:
+          - generic [ref=e39]: https://gravitygame.netlify.app/
+          - iframe [ref=e41]:
+            - main [ref=f36e2]:
+              - generic [ref=f36e3]:
+                - img "Game Logo" [ref=f36e4]
+                - generic [ref=f36e5]:
+                  - img "DH Logo" [ref=f36e6]
+                  - button "Start Game" [ref=f36e7] [cursor=pointer]
+                  - generic [ref=f36e8]:
+                    - img "Arrow Keys" [ref=f36e9]
+                    - paragraph [ref=f36e10]: Use up, left and right arrows
+                    - paragraph [ref=f36e11]: to overcome the obstacles!
+        - generic [ref=e42]:
+          - heading "Tecnologias" [level=3] [ref=e43]
+          - generic [ref=e44]:
+            - generic [ref=e45]: HTML
+            - generic [ref=e46]: CSS
+            - generic [ref=e47]: JavaScript
+        - generic [ref=e48]:
+          - link "Visitar Site" [ref=e49] [cursor=pointer]:
+            - /url: https://gravitygame.netlify.app/
+            - img [ref=e50]
+            - text: Visitar Site
+          - link "GitHub" [ref=e52] [cursor=pointer]:
+            - /url: https://github.com/chuinga/Project-Gravity-Game
+            - img [ref=e53]
+            - text: GitHub
+  - contentinfo [ref=e55]:
+    - generic [ref=e56]:
+      - group "Language selector" [ref=e57]:
+        - button "Switch language to English" [ref=e58]:
+          - img "English" [ref=e59]
+        - button "Switch language to Español" [ref=e60]:
+          - img "Español" [ref=e61]
+        - button "Switch language to Français" [ref=e62]:
+          - img "Français" [ref=e63]
+        - button "Switch language to Português" [pressed] [ref=e64]:
+          - img "Português" [ref=e65]
+      - paragraph [ref=e66]: ©2026 mfpmartins.dev
+      - button "Switch to light theme" [ref=e67]:
+        - img [ref=e68]
+  - alert [ref=e75]

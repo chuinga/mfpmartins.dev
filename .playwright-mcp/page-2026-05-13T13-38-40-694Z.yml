@@ -1,0 +1,56 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - text: mm.
+      - navigation "Main navigation" [ref=e6]:
+        - list [ref=e7]:
+          - listitem [ref=e8]:
+            - link "Inicio" [ref=e168] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e10]:
+            - link "Proyectos" [ref=e169] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e12]:
+            - link "Sobre mí" [ref=e170] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e14]:
+            - link "Habilidades" [ref=e171] [cursor=pointer]:
+              - /url: /skills
+          - listitem [ref=e16]:
+            - link "Contacto" [ref=e172] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=e19]:
+        - link "LinkedIn profile" [ref=e20] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/miguel-martins-a08a76a5/
+          - img [ref=e21]
+        - link "GitHub profile" [ref=e23] [cursor=pointer]:
+          - /url: https://github.com/chuinga
+          - img [ref=e24]
+        - link "Send email" [ref=e26] [cursor=pointer]:
+          - /url: mailto:contact@mfpmartins.dev?subject=Mail%20from%20mfpmartins.dev
+          - img [ref=e27]
+  - main [ref=e30]:
+    - generic [ref=e174]:
+      - paragraph [ref=e176]: Hola, mi nombre es
+      - heading "Miguel Martins" [level=1] [ref=e177]
+      - heading "Creo cosas para la web..." [level=2] [ref=e178]
+      - paragraph [ref=e179]: Soy un desarrollador full-stack basado cerca de Lisboa, Portugal. Mi entusiasmo reside en la programación, el downhill biking y la creación de nuevos sonidos. Impulsado por una curiosidad insaciable, estoy comprometido a expandir constantemente mis conocimientos y perfeccionar mis habilidades, siempre con atención al detalle.
+  - contentinfo [ref=e132]:
+    - generic [ref=e133]:
+      - group "Language selector" [ref=e134]:
+        - button "Switch language to English" [ref=e135]:
+          - img "English" [ref=e136]
+        - button "Switch language to Español" [pressed] [ref=e137]:
+          - img "Español" [ref=e138]
+        - button "Switch language to Français" [ref=e139]:
+          - img "Français" [ref=e140]
+        - button "Switch language to Português" [ref=e141]:
+          - img "Português" [ref=e142]
+      - paragraph [ref=e143]: ©2026 mfpmartins.dev
+      - button "Switch to light theme" [active] [ref=e180]:
+        - img [ref=e165]
+  - button "Open Next.js Dev Tools" [ref=e151] [cursor=pointer]:
+    - img [ref=e152]
+  - alert [ref=e167]

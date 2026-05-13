@@ -1,0 +1,52 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "mfpmartins.dev logo" [ref=e7]
+      - navigation "Main navigation" [ref=e9]:
+        - list [ref=e10]:
+          - listitem [ref=e11]:
+            - link "nav.home" [ref=e12] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e13]:
+            - link "nav.projects" [ref=e14] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e15]:
+            - link "nav.about" [ref=e16] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e17]:
+            - link "nav.skills" [ref=e18] [cursor=pointer]:
+              - /url: /skills
+          - listitem [ref=e19]:
+            - link "nav.contact" [ref=e20] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=e22]:
+        - link "LinkedIn profile" [ref=e23] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/miguel-martins-a08a76a5/
+          - img [ref=e24]
+        - link "GitHub profile" [ref=e26] [cursor=pointer]:
+          - /url: https://github.com/chuinga
+          - img [ref=e27]
+        - link "Send email" [ref=e29] [cursor=pointer]:
+          - /url: mailto:contact@mfpmartins.dev?subject=Mail%20from%20mfpmartins.dev
+          - img [ref=e30]
+  - main [ref=e33]:
+    - generic [ref=e35]:
+      - paragraph [ref=e37]: hero.greeting
+      - heading "hero.name" [level=1] [ref=e38]
+      - heading "hero.title" [level=2] [ref=e39]
+      - paragraph [ref=e40]: hero.description
+  - contentinfo [ref=e41]:
+    - generic [ref=e42]:
+      - group "Language selector" [ref=e43]:
+        - button "Switch language to English" [pressed] [ref=e44]:
+          - img "English" [ref=e45]
+        - button "Switch language to Español" [ref=e46]:
+          - img "Español" [ref=e47]
+        - button "Switch language to Français" [ref=e48]:
+          - img "Français" [ref=e49]
+        - button "Switch language to Português" [ref=e50]:
+          - img "Português" [ref=e51]
+      - paragraph [ref=e52]: ©2026 mfpmartins.dev
+      - button "Toggle theme" [ref=e53]

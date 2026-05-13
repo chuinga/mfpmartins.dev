@@ -1,0 +1,115 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - text: mm.
+      - navigation "Main navigation" [ref=e6]:
+        - list [ref=e7]:
+          - listitem [ref=e8]:
+            - link "Home" [ref=e102] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e10]:
+            - link "Projects" [ref=e103] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e12]:
+            - link "About" [ref=e104] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e14]:
+            - link "Skills" [ref=e105] [cursor=pointer]:
+              - /url: /skills
+          - listitem [ref=e16]:
+            - link "Contact" [ref=e106] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=e19]:
+        - link "LinkedIn profile" [ref=e20] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/miguel-martins-a08a76a5/
+          - img [ref=e21]
+        - link "GitHub profile" [ref=e23] [cursor=pointer]:
+          - /url: https://github.com/chuinga
+          - img [ref=e24]
+        - link "Send email" [ref=e26] [cursor=pointer]:
+          - /url: mailto:contact@mfpmartins.dev?subject=Mail%20from%20mfpmartins.dev
+          - img [ref=e27]
+  - main [ref=e30]:
+    - generic [ref=e32]:
+      - complementary [ref=e33]:
+        - heading "Projects" [level=2] [ref=e107]
+        - list [ref=e35]:
+          - listitem [ref=e36]:
+            - link "mfpmartins.dev" [ref=e37] [cursor=pointer]:
+              - /url: /projects/mfpmartins-dev
+          - listitem [ref=e38]:
+            - link "Setúbal" [ref=e39] [cursor=pointer]:
+              - /url: /projects/setubal
+          - listitem [ref=e40]:
+            - link "GrooveGrid" [ref=e41] [cursor=pointer]:
+              - /url: /projects/groovegrid
+          - listitem [ref=e42]:
+            - link "Pawsitive Homes" [ref=e43] [cursor=pointer]:
+              - /url: /projects/pawsitivehomes
+          - listitem [ref=e44]:
+            - link "Gravity" [active] [ref=e45] [cursor=pointer]:
+              - /url: /projects/gravity
+      - generic [ref=e111]:
+        - heading "Gravity" [level=2] [ref=e112]
+        - paragraph [ref=e113]: A game where players jump over obstacles to gain score and try to catch snacks to gain lives and also score. The game ends when the lives are over or when is reached a score of 100 points.
+        - generic [ref=e114]:
+          - generic [ref=e119]: https://gravitygame.netlify.app/
+          - iframe [ref=e120]:
+            - main [ref=f1e2]:
+              - generic [ref=f1e3]:
+                - img "Game Logo"
+                - generic [ref=f1e4]:
+                  - img "DH Logo"
+                  - button "Start Game" [ref=f1e5]
+                  - generic [ref=f1e6]:
+                    - img "Arrow Keys"
+                    - paragraph [ref=f1e7]: Use up, left and right arrows
+                    - paragraph [ref=f1e8]: to overcome the obstacles!
+              - generic [ref=f1e11]:
+                - heading "Stats" [level=2] [ref=f1e12]
+                - paragraph [ref=f1e13]: "Score: 0"
+                - paragraph [ref=f1e14]: "Lives: 3"
+              - generic [ref=f1e15]:
+                - generic [ref=f1e16]:
+                  - generic [ref=f1e17]:
+                    - paragraph [ref=f1e18]:
+                      - text: Game Over!
+                      - text: You Win!
+                    - paragraph
+                  - button "Restart" [ref=f1e19]
+                  - paragraph [ref=f1e20]: "Final Score: 0"
+                - img "Game-End"
+        - generic [ref=e121]:
+          - heading "Technologies" [level=3] [ref=e122]
+          - generic [ref=e123]:
+            - generic [ref=e124]: HTML
+            - generic [ref=e125]: CSS
+            - generic [ref=e126]: JavaScript
+        - generic [ref=e127]:
+          - link "Visit Site" [ref=e128] [cursor=pointer]:
+            - /url: https://gravitygame.netlify.app/
+            - img [ref=e129]
+            - text: Visit Site
+          - link "GitHub" [ref=e131] [cursor=pointer]:
+            - /url: https://github.com/chuinga/Project-Gravity-Game
+            - img [ref=e132]
+            - text: GitHub
+  - contentinfo [ref=e73]:
+    - generic [ref=e74]:
+      - group "Language selector" [ref=e75]:
+        - button "Switch language to English" [pressed] [ref=e76]:
+          - img "English" [ref=e77]
+        - button "Switch language to Español" [ref=e78]:
+          - img "Español" [ref=e79]
+        - button "Switch language to Français" [ref=e80]:
+          - img "Français" [ref=e81]
+        - button "Switch language to Português" [ref=e82]:
+          - img "Português" [ref=e83]
+      - paragraph [ref=e84]: ©2026 mfpmartins.dev
+      - button "Switch to light theme" [ref=e85]:
+        - img [ref=e86]
+  - button "Open Next.js Dev Tools" [ref=e97] [cursor=pointer]:
+    - img [ref=e98]
+  - alert [ref=e101]

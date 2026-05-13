@@ -1,0 +1,31 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - text: mm.
+      - button "Open menu" [ref=e6]:
+        - img [ref=e7]
+  - main [ref=e8]:
+    - generic [ref=e10]:
+      - paragraph [ref=e12]: Hola, mi nombre es
+      - heading "Miguel Martins" [level=1] [ref=e13]
+      - heading "Creo cosas para la web..." [level=2] [ref=e14]
+      - paragraph [ref=e15]: Soy un desarrollador full-stack basado cerca de Lisboa, Portugal. Mi entusiasmo reside en la programación, el downhill biking y la creación de nuevos sonidos. Impulsado por una curiosidad insaciable, estoy comprometido a expandir constantemente mis conocimientos y perfeccionar mis habilidades, siempre con atención al detalle.
+  - contentinfo [ref=e16]:
+    - generic [ref=e17]:
+      - group "Language selector" [ref=e18]:
+        - button "Switch language to English" [ref=e19]:
+          - img "English" [ref=e20]
+        - button "Switch language to Español" [pressed] [ref=e21]:
+          - img "Español" [ref=e22]
+        - button "Switch language to Français" [ref=e23]:
+          - img "Français" [ref=e24]
+        - button "Switch language to Português" [ref=e25]:
+          - img "Português" [ref=e26]
+      - paragraph [ref=e27]: ©2026 mfpmartins.dev
+      - button "Switch to light theme" [ref=e28]:
+        - img [ref=e29]
+  - button "Open Next.js Dev Tools" [ref=e40] [cursor=pointer]:
+    - img [ref=e41]
+  - alert [ref=e44]

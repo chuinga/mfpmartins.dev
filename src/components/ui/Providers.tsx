@@ -11,7 +11,10 @@ interface ProvidersProps {
 export function Providers({ children }: ProvidersProps): ReactNode {
   return (
     <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem storageKey="theme">
-      <LocaleProvider>{children}</LocaleProvider>
+      <LocaleProvider>
+        {children}
+        <div aria-live="polite" aria-atomic="true" className="sr-only" id="announcer" />
+      </LocaleProvider>
     </ThemeProvider>
   )
 }

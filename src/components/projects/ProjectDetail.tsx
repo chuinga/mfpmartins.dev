@@ -26,13 +26,20 @@ export function ProjectDetail({ project }: ProjectDetailProps): React.ReactNode 
           <span className="ml-2 text-xs text-description truncate">{project.siteUrl}</span>
         </div>
         {project.embedUrl ? (
-          <iframe
-            src={project.embedUrl}
-            title={project.title}
-            className="w-full h-80 border-0"
-            loading="lazy"
-            sandbox="allow-scripts allow-same-origin"
-          />
+          <div className="relative w-full h-80 overflow-hidden">
+            <iframe
+              src={project.embedUrl}
+              title={project.title}
+              className="absolute top-0 left-0 border-0 origin-top-left"
+              style={{
+                width: '200%',
+                height: '200%',
+                transform: 'scale(0.5)',
+              }}
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin"
+            />
+          </div>
         ) : (
           <div className="flex items-center justify-center h-64 bg-card-bg">
             <p className="text-description text-sm">Preview not available</p>

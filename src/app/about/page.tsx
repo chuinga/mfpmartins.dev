@@ -14,7 +14,7 @@ export default function AboutPage(): React.ReactNode {
           <div className="w-48 h-48 shrink-0 rounded-full overflow-hidden border-2 border-title2/30 bg-card-bg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/avatar-placeholder.svg"
+              src="/images/Profile.jpg"
               alt="Miguel Martins"
               width={192}
               height={192}

@@ -7,7 +7,6 @@ export interface Project {
   githubUrl: string
   screenshotPath?: string
   embedUrl?: string
-  isCurrent?: boolean
 }
 
 export const projects: Project[] = [
@@ -18,7 +17,7 @@ export const projects: Project[] = [
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Three.js', 'Framer Motion'],
     siteUrl: 'https://mfpmartins.dev',
     githubUrl: 'https://github.com/chuinga/mfpmartins.dev',
-    isCurrent: true,
+    embedUrl: 'https://mfpmartins.dev',
   },
   {
     slug: 'setubal',

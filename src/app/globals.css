@@ -54,17 +54,17 @@ body {
 }
 
 @keyframes logo-float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+  0% {
+    transform: translateY(0px) rotateY(0deg);
   }
-  25% {
-    transform: translateY(-2px) rotate(1deg);
+  50% {
+    transform: translateY(-2px) rotateY(180deg);
   }
-  75% {
-    transform: translateY(2px) rotate(-1deg);
+  100% {
+    transform: translateY(0px) rotateY(360deg);
   }
 }
 
 .animate-logo-float {
-  animation: logo-float 4s ease-in-out infinite;
+  animation: logo-float 6s ease-in-out infinite;
 }

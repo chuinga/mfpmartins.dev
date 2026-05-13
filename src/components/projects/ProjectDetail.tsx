@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { type Project } from '@/content/project-data'
 import { useTranslations } from '@/lib/LocaleContext'
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
@@ -24,14 +23,27 @@ export function ProjectDetail({ project }: ProjectDetailProps): React.ReactNode 
           <span className="w-3 h-3 rounded-full bg-red-400" />
           <span className="w-3 h-3 rounded-full bg-yellow-400" />
           <span className="w-3 h-3 rounded-full bg-green-400" />
+          <span className="ml-2 text-xs text-description truncate">{project.siteUrl}</span>
         </div>
-        <Image
-          src={project.screenshotPath}
-          alt={`Screenshot of ${project.title}`}
-          width={800}
-          height={450}
-          className="w-full h-auto"
-        />
+        {project.isCurrent ? (
+          <div className="flex items-center justify-center h-64 bg-card-bg">
+            <p className="text-title2 text-lg font-medium">
+              ✨ You&apos;re looking at it!
+            </p>
+          </div>
+        ) : project.embedUrl ? (
+          <iframe
+            src={project.embedUrl}
+            title={project.title}
+            className="w-full h-80 border-0"
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin"
+          />
+        ) : (
+          <div className="flex items-center justify-center h-64 bg-card-bg">
+            <p className="text-description text-sm">Preview not available</p>
+          </div>
+        )}
       </div>
 
       <div className="mb-6">

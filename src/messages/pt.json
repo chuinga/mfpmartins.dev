@@ -20,7 +20,8 @@
     "gravity_description": "Um jogo onde os jogadores saltam sobre obstáculos para ganhar pontos e tentam apanhar snacks para ganhar vidas e também pontos. O jogo termina quando as vidas acabam ou quando se atinge uma pontuação de 100 pontos.",
     "pawsitivehomes_description": "Uma base de dados online e pesquisável de animais que precisam de um lar. Somos um refúgio de esperança e alegria para os nossos amigos peludos.",
     "groovegrid_description": "Uma aplicação musical que permite criar uma experiência personalizada adaptada ao seu gosto musical.",
-    "setubal_description": "Um website com as minhas atrações favoritas em Setúbal: a Arrábida, as suas praias e a sua gastronomia."
+    "setubal_description": "Um website com as minhas atrações favoritas em Setúbal: a Arrábida, as suas praias e a sua gastronomia.",
+    "mfpmartins_description": "O meu website de portfólio pessoal — aquele que está a navegar neste momento. Construído com Next.js, React, TypeScript, Tailwind CSS, Three.js e Framer Motion. Implementado na AWS."
   },
   "about": {
     "heading": "Sobre Mim",

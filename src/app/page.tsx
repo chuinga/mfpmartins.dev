@@ -7,7 +7,7 @@ export default function Home(): React.ReactNode {
   const { t } = useTranslations()
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4 sm:px-6">
+    <div className="flex flex-1 flex-col items-center justify-center px-4 sm:px-6 py-12">
       <AnimatedSection className="max-w-2xl w-full relative pl-6">
         <div
           className="absolute left-0 top-0 bottom-0 w-1 rounded-full"

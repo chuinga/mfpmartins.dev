@@ -38,3 +38,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# playwright testing artifacts
+.playwright-mcp/
+
+# IDE
+.vscode/
+
+# Kiro resources (reference only, not deployed)
+.kiro/resources/

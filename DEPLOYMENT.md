@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- AWS Account (account number to be provided)
+- AWS Account: `058264503354` (IAM user: Miguel)
 - GitHub repository: https://github.com/chuinga/mfpmartins.dev
 - Custom domain: mfpmartins.dev
 

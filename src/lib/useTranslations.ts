@@ -5,7 +5,7 @@ import { type Locale, defaultLocale, locales } from './i18n'
 
 type Messages = Record<string, string | Record<string, string>>
 
-let cachedMessages: Record<Locale, Messages | null> = {
+const cachedMessages: Record<Locale, Messages | null> = {
   en: null,
   es: null,
   fr: null,

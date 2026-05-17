@@ -5,14 +5,23 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  // Override default ignores of eslint-config-next.
   globalIgnores([
-    // Default ignores of eslint-config-next:
     ".next/**",
     "out/**",
     "build/**",
     "next-env.d.ts",
+    ".kiro/**",
+    ".playwright-mcp/**",
+    "infra/**",
   ]),
+  {
+    rules: {
+      // Allow setState in effects for client-side initialization patterns
+      "react-hooks/set-state-in-effect": "off",
+      // Allow Math.random in useMemo for Three.js particle generation
+      "react-hooks/purity": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

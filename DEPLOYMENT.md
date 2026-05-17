@@ -5,6 +5,8 @@
 - AWS Account: `058264503354` (IAM user: Miguel)
 - GitHub repository: https://github.com/chuinga/mfpmartins.dev
 - Custom domain: mfpmartins.dev
+- Amplify App ID: `d2dwwqpvbzqcdg`
+- Default URL: https://main.d2dwwqpvbzqcdg.amplifyapp.com
 
 ## Setup Steps
 

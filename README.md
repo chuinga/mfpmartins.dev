@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# mfpmartins.dev
 
-## Getting Started
+Personal portfolio website for Miguel Martins — Full-Stack Developer.
 
-First, run the development server:
+## Live Site
+
+**Production:** https://main.d2dwwqpvbzqcdg.amplifyapp.com  
+**Custom domain (pending):** https://mfpmartins.dev
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript (strict mode)
+- **Styling:** Tailwind CSS v4
+- **3D Graphics:** Three.js via React Three Fiber
+- **Animations:** Framer Motion
+- **Theming:** next-themes (dark/light)
+- **i18n:** Custom client-side (EN/ES/FR/PT)
+- **Deployment:** AWS Amplify
+- **IaC:** Terraform
+- **CI/CD:** GitHub Actions
+
+## Features
+
+- Animated 3D particle background (planet colors, mouse-responsive)
+- Spinning animated logo
+- Dark/light theme with system preference detection
+- Multi-language support (English, Spanish, French, Portuguese)
+- Responsive design (mobile-first)
+- Project showcases with live iframe previews
+- Skills grid with categorized tech icons
+- SEO metadata + OpenGraph tags
+- Accessible (ARIA labels, keyboard navigation, focus indicators)
+
+## Development
 
 ```bash
+npm install --legacy-peer-deps
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for full AWS setup instructions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**CI/CD Pipeline:** Pushes to `main` trigger:
+1. Validate (TypeScript + ESLint + build)
+2. Preflight SAST (npm audit + secrets scan)
+3. Terraform Plan
+4. Terraform Deploy (Amplify infrastructure)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Infrastructure
 
-## Deploy on Vercel
+Managed via Terraform in `/infra`:
+- AWS Amplify App + branch + auto-build
+- S3 backend for Terraform state
+- DynamoDB table for state locking
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/           → Pages (App Router)
+├── components/    → UI components
+├── content/       → Project data
+├── lib/           → Utilities and i18n
+├── messages/      → Translation files (EN/ES/FR/PT)
+public/            → Static assets
+infra/             → Terraform IaC
+.github/workflows/ → CI/CD pipeline
+```

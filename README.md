@@ -4,8 +4,8 @@ Personal portfolio website for Miguel Martins — Full-Stack Developer.
 
 ## Live Site
 
-**Production:** https://main.d2dwwqpvbzqcdg.amplifyapp.com  
-**Custom domain (pending):** https://mfpmartins.dev
+**Production:** https://mfpmartins.dev  
+**CloudFront:** https://d3jxiihenswfnk.cloudfront.net
 
 ## Tech Stack
 
@@ -16,7 +16,7 @@ Personal portfolio website for Miguel Martins — Full-Stack Developer.
 - **Animations:** Framer Motion
 - **Theming:** next-themes (dark/light)
 - **i18n:** Custom client-side (EN/ES/FR/PT)
-- **Deployment:** AWS Amplify
+- **Deployment:** AWS (S3 + CloudFront)
 - **IaC:** Terraform
 - **CI/CD:** GitHub Actions
 
@@ -55,14 +55,16 @@ See [DEPLOYMENT.md](./DEPLOYMENT.md) for full AWS setup instructions.
 1. Validate (TypeScript + ESLint + build)
 2. Preflight SAST (npm audit + secrets scan)
 3. Terraform Plan
-4. Terraform Deploy (Amplify infrastructure)
+4. Terraform Deploy (S3 + CloudFront infrastructure)
+5. Deploy to S3 + CloudFront cache invalidation
 
 ## Infrastructure
 
 Managed via Terraform in `/infra`:
-- AWS Amplify App + branch + auto-build
-- S3 backend for Terraform state
-- DynamoDB table for state locking
+- S3 bucket for static site files
+- CloudFront CDN with HTTPS (ACM certificate)
+- S3 bucket for access logs (telemetry)
+- S3 backend + DynamoDB for Terraform state
 
 ## Project Structure
 

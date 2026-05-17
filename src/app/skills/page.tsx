@@ -31,16 +31,7 @@ import {
   SiKubernetes,
   SiDatadog,
 } from 'react-icons/si'
-import {
-  MdAccessibility,
-  MdDevices,
-  MdCloud,
-  MdSmartToy,
-  MdTerminal,
-  MdStorage,
-  MdAutoAwesome,
-  MdPsychology,
-} from 'react-icons/md'
+import { MdAccessibility, MdDevices, MdCloud, MdSmartToy, MdTerminal, MdStorage, MdAutoAwesome, MdPsychology } from 'react-icons/md'
 import { type ReactNode } from 'react'
 
 interface Skill {
@@ -120,7 +111,6 @@ const skillCategories: SkillCategory[] = [
       { name: 'Jira', icon: <FaJira className="w-8 h-8" /> },
       { name: 'Agile/Scrum', icon: <FaDatabase className="w-8 h-8" /> },
       { name: 'Accessibility', icon: <MdAccessibility className="w-8 h-8" /> },
-      { name: 'Responsive Design', icon: <MdDevices className="w-8 h-8" /> },
     ],
   },
 ]

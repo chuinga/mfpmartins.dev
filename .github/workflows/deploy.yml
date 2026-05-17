@@ -10,7 +10,7 @@ permissions:
 
 env:
   AWS_REGION: eu-west-1
-  NODE_VERSION: '20'
+  NODE_VERSION: '22'
   TERRAFORM_VERSION: '1.7'
 
 jobs:

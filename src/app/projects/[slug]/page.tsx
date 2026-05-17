@@ -1,18 +1,10 @@
-'use client'
-
-import { useParams } from 'next/navigation'
 import { projects } from '@/content/project-data'
-import { ProjectDetail } from '@/components/projects/ProjectDetail'
-import { notFound } from 'next/navigation'
+import { ProjectPageClient } from './ProjectPageClient'
 
-export default function ProjectPage(): React.ReactNode {
-  const params = useParams()
-  const slug = params.slug as string
-  const project = projects.find((p) => p.slug === slug)
+export function generateStaticParams(): Array<{ slug: string }> {
+  return projects.map((p) => ({ slug: p.slug }))
+}
 
-  if (!project) {
-    notFound()
-  }
-
-  return <ProjectDetail project={project} />
+export default function ProjectPage() {
+  return <ProjectPageClient />
 }

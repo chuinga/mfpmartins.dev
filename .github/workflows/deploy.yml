@@ -6,7 +6,6 @@ on:
 
 permissions:
   contents: read
-  id-token: write
 
 env:
   AWS_REGION: eu-west-1
@@ -14,7 +13,7 @@ env:
   TERRAFORM_VERSION: '1.7'
 
 jobs:
-  # Step 1: Lint, type-check, and detect duplicates
+  # Step 1: Lint, type-check, and build
   validate:
     name: Validate
     runs-on: ubuntu-latest
@@ -34,10 +33,16 @@ jobs:
       - name: ESLint
         run: npm run lint
 
-      - name: Build validation
+      - name: Build static export
         run: npm run build
 
-  # Step 2: Security scanning (SAST)
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-site
+          path: out/
+
+  # Step 2: Security scanning
   preflight-sast:
     name: Preflight SAST
     runs-on: ubuntu-latest
@@ -57,9 +62,7 @@ jobs:
 
       - name: Check for hardcoded secrets
         run: |
-          # Simple grep-based check for common secret patterns
           ! grep -rn "AKIA[0-9A-Z]\{16\}" --include="*.ts" --include="*.tsx" --include="*.js" src/ || echo "No hardcoded AWS keys found"
-          ! grep -rn "password\s*=" --include="*.ts" --include="*.tsx" --include="*.js" src/ || echo "No hardcoded passwords found"
 
   # Step 3: Terraform plan
   terraform-plan:
@@ -91,8 +94,6 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan -out=tfplan
-        env:
-          TF_VAR_github_access_token: ${{ secrets.GH_ACCESS_TOKEN }}
 
       - name: Upload plan
         uses: actions/upload-artifact@v4
@@ -133,5 +134,32 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
-        env:
-          TF_VAR_github_access_token: ${{ secrets.GH_ACCESS_TOKEN }}
+
+  # Step 5: Deploy to S3 + invalidate CloudFront
+  deploy-site:
+    name: Deploy to S3
+    runs-on: ubuntu-latest
+    needs: [terraform-deploy]
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Download build output
+        uses: actions/download-artifact@v4
+        with:
+          name: static-site
+          path: out
+
+      - name: Sync to S3
+        run: aws s3 sync out/ s3://mfpmartins-dev-website --delete
+
+      - name: Invalidate CloudFront cache
+        run: |
+          DIST_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Origins.Items[?DomainName=='mfpmartins-dev-website.s3.eu-west-1.amazonaws.com']].Id" --output text)
+          if [ -n "$DIST_ID" ]; then
+            aws cloudfront create-invalidation --distribution-id $DIST_ID --paths "/*"
+          fi

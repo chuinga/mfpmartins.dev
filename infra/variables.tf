@@ -16,6 +16,12 @@ variable "github_repository" {
   default     = "https://github.com/chuinga/mfpmartins.dev"
 }
 
+variable "github_access_token" {
+  description = "GitHub personal access token for Amplify to access the repository"
+  type        = string
+  sensitive   = true
+}
+
 variable "github_branch" {
   description = "Branch to deploy from"
   type        = string

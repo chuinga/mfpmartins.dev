@@ -10,7 +10,8 @@ resource "aws_amplify_app" "portfolio" {
       phases:
         preBuild:
           commands:
-            - npm ci
+            - nvm use 22
+            - npm ci --legacy-peer-deps
         build:
           commands:
             - npm run build

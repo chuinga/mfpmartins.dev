@@ -1,0 +1,112 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - text: mm.
+      - navigation "Main navigation" [ref=e6]:
+        - list [ref=e7]:
+          - listitem [ref=e8]:
+            - link "nav.home" [ref=e9] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e10]:
+            - link "nav.projects" [ref=e11] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e12]:
+            - link "nav.about" [ref=e13] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e14]:
+            - link "nav.skills" [ref=e15] [cursor=pointer]:
+              - /url: /skills
+          - listitem [ref=e16]:
+            - link "nav.contact" [ref=e17] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=e19]:
+        - link "LinkedIn profile" [ref=e20] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/miguel-martins-a08a76a5/
+          - img [ref=e21]
+        - link "GitHub profile" [ref=e23] [cursor=pointer]:
+          - /url: https://github.com/chuinga
+          - img [ref=e24]
+        - link "Send email" [ref=e26] [cursor=pointer]:
+          - /url: mailto:contact@mfpmartins.dev?subject=Mail%20from%20mfpmartins.dev
+          - img [ref=e27]
+  - main [ref=e30]:
+    - generic [ref=e31]:
+      - heading "skills.heading" [level=1] [ref=e33]
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - heading "skills.frontend" [level=2] [ref=e36]
+          - generic [ref=e37]:
+            - generic [ref=e38]:
+              - img [ref=e40]
+              - generic [ref=e42]: React
+            - generic [ref=e43]:
+              - img [ref=e45]
+              - generic [ref=e47]: Next.js
+            - generic [ref=e48]:
+              - img [ref=e50]
+              - generic [ref=e52]: TypeScript
+            - generic [ref=e53]:
+              - img [ref=e55]
+              - generic [ref=e57]: JavaScript
+            - generic [ref=e58]:
+              - img [ref=e60]
+              - generic [ref=e62]: HTML5
+            - generic [ref=e63]:
+              - img [ref=e65]
+              - generic [ref=e67]: CSS3
+            - generic [ref=e68]:
+              - img [ref=e70]
+              - generic [ref=e72]: Tailwind CSS
+            - generic [ref=e73]:
+              - img [ref=e75]
+              - generic [ref=e77]: Three.js
+        - generic [ref=e78]:
+          - heading "skills.tools" [level=2] [ref=e79]
+          - generic [ref=e80]:
+            - generic [ref=e81]:
+              - img [ref=e83]
+              - generic [ref=e85]: Git
+            - generic [ref=e86]:
+              - img [ref=e88]
+              - generic [ref=e90]: GitHub
+            - generic [ref=e91]:
+              - img [ref=e93]
+              - generic [ref=e95]: Vite
+            - generic [ref=e96]:
+              - img [ref=e98]
+              - generic [ref=e100]: npm
+            - generic [ref=e101]:
+              - img [ref=e103]
+              - generic [ref=e105]: Figma
+        - generic [ref=e106]:
+          - heading "skills.other" [level=2] [ref=e107]
+          - generic [ref=e108]:
+            - generic [ref=e109]:
+              - img [ref=e111]
+              - generic [ref=e114]: Responsive Design
+            - generic [ref=e115]:
+              - img [ref=e117]
+              - generic [ref=e120]: SEO
+            - generic [ref=e121]:
+              - img [ref=e123]
+              - generic [ref=e126]: Accessibility
+            - generic [ref=e127]:
+              - img [ref=e129]
+              - generic [ref=e131]: AWS
+  - contentinfo [ref=e132]:
+    - generic [ref=e133]:
+      - group "Language selector" [ref=e134]:
+        - button "Switch language to English" [pressed] [ref=e135]:
+          - img "English" [ref=e136]
+        - button "Switch language to Español" [ref=e137]:
+          - img "Español" [ref=e138]
+        - button "Switch language to Français" [ref=e139]:
+          - img "Français" [ref=e140]
+        - button "Switch language to Português" [ref=e141]:
+          - img "Português" [ref=e142]
+      - paragraph [ref=e143]: ©2026 mfpmartins.dev
+      - button "Toggle theme" [ref=e144]
+  - button "Open Next.js Dev Tools" [ref=e151] [cursor=pointer]:
+    - img [ref=e152]

@@ -1,0 +1,44 @@
+.content {
+    position: relative;
+    margin-left: 3%;
+    padding-left: 10px;
+    width: 75%;
+}
+
+.colorBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    width: 5px;
+    height: 87%;
+    background: linear-gradient(to right, var(--gradient1), var(--gradient2), var(--gradient3));
+}
+
+.blue {
+    color: var(--title1-color);
+}
+
+.lightBlue {
+    color: var(--title2-color);
+}
+
+.description {
+    color: var(--description);
+}
+
+@media (max-width: 768px) {
+    
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {   
+    
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+    
+}
+
+@media (min-width: 1440px) {
+    
+}

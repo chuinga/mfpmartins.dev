@@ -1,0 +1,28 @@
+/* .content {
+    padding-left: 5%;
+} */
+
+h2, p {
+    margin:0;           
+}
+
+.blue {
+    color: var(--title1-color);
+}
+
+.lightBlue {
+    color: var(--title2-color);
+}
+
+.projectDescription {
+    padding: 1% 0 0 2%;
+    color: var(--description);    
+}
+
+.links{    
+    display: inline-block;
+    margin: 1% 0 0 5%;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: var(--description);
+}

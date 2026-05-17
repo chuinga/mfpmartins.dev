@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "projects": "Projets",
+    "about": "À propos",
+    "skills": "Compétences",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Bonjour, je m'appelle",
+    "name": "Miguel Martins",
+    "title": "Je crée des choses pour le web...",
+    "description": "Je suis un développeur full-stack basé près de Lisbonne, au Portugal. Mon enthousiasme réside dans la programmation, le downhill biking et la création de nouveaux sons. Animé par une curiosité insatiable, je m'engage à élargir constamment mes connaissances et à perfectionner mes compétences, toujours avec attention aux détails."
+  },
+  "projects": {
+    "heading": "Projets",
+    "visitSite": "Visiter le Site",
+    "github": "GitHub",
+    "technologies": "Technologies",
+    "gravity_description": "Un jeu où les joueurs sautent par-dessus des obstacles pour gagner des points et essaient d'attraper des snacks pour gagner des vies et aussi des points. Le jeu se termine quand les vies sont épuisées ou quand un score de 100 points est atteint.",
+    "pawsitivehomes_description": "Une base de données en ligne et consultable d'animaux qui ont besoin d'un foyer. Nous sommes un refuge d'espoir et de joie pour nos amis à fourrure.",
+    "groovegrid_description": "Une application musicale qui vous permet de créer une expérience personnalisée adaptée à vos goûts musicaux.",
+    "setubal_description": "Un site web présentant mes attractions préférées à Setúbal : Arrábida, ses plages et sa gastronomie.",
+    "mfpmartins_description": "Mon site web portfolio personnel — celui que vous parcourez en ce moment. Construit avec Next.js, React, TypeScript, Tailwind CSS, Three.js et Framer Motion. Déployé sur AWS."
+  },
+  "about": {
+    "heading": "À Propos",
+    "bio": "Je suis un développeur full-stack basé près de Lisbonne, au Portugal. Mon enthousiasme réside dans la programmation, le downhill biking et la création de nouveaux sons. Animé par une curiosité insatiable, je m'engage à élargir constamment mes connaissances et à perfectionner mes compétences, toujours avec attention aux détails.",
+    "location": "Près de Lisbonne, Portugal",
+    "role": "Développeur Full-Stack"
+  },
+  "skills": {
+    "heading": "Compétences & Technologies",
+    "frontend": "Frontend",
+    "backend": "Backend & Langages",
+    "databases": "Bases de Données",
+    "cloud": "Cloud & DevOps",
+    "ai": "IA & Outils Agentiques",
+    "tools": "Outils & Workflow"
+  },
+  "contact": {
+    "heading": "Me Contacter",
+    "cta": "Je suis toujours ouvert aux nouvelles opportunités et collaborations. Si vous avez une question ou voulez simplement dire bonjour, n'hésitez pas à me contacter !",
+    "email": "Envoyer un Email"
+  },
+  "footer": {
+    "copyright": "© {year} mfpmartins.dev"
+  },
+  "notFound": {
+    "message": "On dirait que vous êtes tombé dans un trou noir. Retournons à la",
+    "link": "page d'accueil"
+  }
+}

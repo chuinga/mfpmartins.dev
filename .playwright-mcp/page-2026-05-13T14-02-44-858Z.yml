@@ -1,0 +1,94 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - text: mm.
+      - navigation "Main navigation" [ref=e6]:
+        - list [ref=e7]:
+          - listitem [ref=e8]:
+            - link "nav.home" [ref=e9] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e10]:
+            - link "nav.projects" [ref=e11] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e12]:
+            - link "nav.about" [ref=e13] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e14]:
+            - link "nav.skills" [ref=e15] [cursor=pointer]:
+              - /url: /skills
+          - listitem [ref=e16]:
+            - link "nav.contact" [ref=e17] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=e19]:
+        - link "LinkedIn profile" [ref=e20] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/miguel-martins-a08a76a5/
+          - img [ref=e21]
+        - link "GitHub profile" [ref=e23] [cursor=pointer]:
+          - /url: https://github.com/chuinga
+          - img [ref=e24]
+        - link "Send email" [ref=e26] [cursor=pointer]:
+          - /url: mailto:contact@mfpmartins.dev?subject=Mail%20from%20mfpmartins.dev
+          - img [ref=e27]
+  - main [ref=e30]:
+    - generic [ref=e32]:
+      - complementary [ref=e33]:
+        - heading "projects.heading" [level=2] [ref=e34]
+        - list [ref=e35]:
+          - listitem [ref=e36]:
+            - link "mfpmartins.dev" [ref=e37] [cursor=pointer]:
+              - /url: /projects/mfpmartins-dev
+          - listitem [ref=e38]:
+            - link "Setúbal" [ref=e39] [cursor=pointer]:
+              - /url: /projects/setubal
+          - listitem [ref=e40]:
+            - link "GrooveGrid" [ref=e41] [cursor=pointer]:
+              - /url: /projects/groovegrid
+          - listitem [ref=e42]:
+            - link "Pawsitive Homes" [ref=e43] [cursor=pointer]:
+              - /url: /projects/pawsitivehomes
+          - listitem [ref=e44]:
+            - link "Gravity" [ref=e45] [cursor=pointer]:
+              - /url: /projects/gravity
+      - generic [ref=e46]:
+        - heading "mfpmartins.dev" [level=2] [ref=e47]
+        - paragraph [ref=e48]: projects.mfpmartins_description
+        - generic [ref=e49]:
+          - generic [ref=e54]: https://mfpmartins.dev
+          - paragraph [ref=e56]: ✨ You're looking at it!
+        - generic [ref=e57]:
+          - heading "projects.technologies" [level=3] [ref=e58]
+          - generic [ref=e59]:
+            - generic [ref=e60]: Next.js
+            - generic [ref=e61]: React
+            - generic [ref=e62]: TypeScript
+            - generic [ref=e63]: Tailwind CSS
+            - generic [ref=e64]: Three.js
+            - generic [ref=e65]: Framer Motion
+        - generic [ref=e66]:
+          - link "projects.visitSite" [ref=e67] [cursor=pointer]:
+            - /url: https://mfpmartins.dev
+            - img [ref=e68]
+            - text: projects.visitSite
+          - link "projects.github" [ref=e70] [cursor=pointer]:
+            - /url: https://github.com/chuinga/mfpmartins.dev
+            - img [ref=e71]
+            - text: projects.github
+  - contentinfo [ref=e73]:
+    - generic [ref=e74]:
+      - group "Language selector" [ref=e75]:
+        - button "Switch language to English" [pressed] [ref=e76]:
+          - img "English" [ref=e77]
+        - button "Switch language to Español" [ref=e78]:
+          - img "Español" [ref=e79]
+        - button "Switch language to Français" [ref=e80]:
+          - img "Français" [ref=e81]
+        - button "Switch language to Português" [ref=e82]:
+          - img "Português" [ref=e83]
+      - paragraph [ref=e84]: ©2026 mfpmartins.dev
+      - button "Switch to light theme" [ref=e85]:
+        - img [ref=e86]
+  - button "Open Next.js Dev Tools" [ref=e97] [cursor=pointer]:
+    - img [ref=e98]
+  - alert [ref=e101]

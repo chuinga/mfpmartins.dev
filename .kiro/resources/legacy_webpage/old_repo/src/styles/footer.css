@@ -1,0 +1,31 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3px;
+}
+
+.lang {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lang img {
+    width: 27px;
+    height: 27px;
+    margin: 3px;
+}
+
+.langIcon {
+    cursor: pointer;
+}
+
+.langIcon.selected {
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px blue;
+}
+
+p {
+    color: var(--description);
+}

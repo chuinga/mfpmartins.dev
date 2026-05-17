@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, my name is",
+    "name": "Miguel Martins",
+    "title": "I create stuff for the web...",
+    "description": "I am a full-stack developer based near Lisbon, Portugal. My enthusiasm lies in programming, downhill biking, and creating new sounds. Driven by an insatiable curiosity, I am committed to constantly expanding my knowledge and perfecting my skills, always with attention to detail."
+  },
+  "projects": {
+    "heading": "Projects",
+    "visitSite": "Visit Site",
+    "github": "GitHub",
+    "technologies": "Technologies",
+    "gravity_description": "A game where players jump over obstacles to gain score and try to catch snacks to gain lives and also score. The game ends when the lives are over or when is reached a score of 100 points.",
+    "pawsitivehomes_description": "An online, searchable database of animals who need homes. We are a refuge of hope and joy for our furry friends.",
+    "groovegrid_description": "A music application that allows you to create a personalized experience tailored to your musical taste.",
+    "setubal_description": "A website featuring my favorite attractions in Setúbal: Arrábida, its beaches, and its gastronomy.",
+    "mfpmartins_description": "My personal portfolio website — the one you're browsing right now. Built with Next.js, React, TypeScript, Tailwind CSS, Three.js, and Framer Motion. Deployed on AWS."
+  },
+  "about": {
+    "heading": "About Me",
+    "bio": "I am a full-stack developer based near Lisbon, Portugal. My enthusiasm lies in programming, downhill biking, and creating new sounds. Driven by an insatiable curiosity, I am committed to constantly expanding my knowledge and perfecting my skills, always with attention to detail.",
+    "location": "Near Lisbon, Portugal",
+    "role": "Full-Stack Developer"
+  },
+  "skills": {
+    "heading": "Skills & Technologies",
+    "frontend": "Frontend",
+    "backend": "Backend & Languages",
+    "databases": "Databases",
+    "cloud": "Cloud & DevOps",
+    "ai": "AI & Agentic Tooling",
+    "tools": "Tools & Workflow"
+  },
+  "contact": {
+    "heading": "Get In Touch",
+    "cta": "I'm always open to new opportunities and collaborations. Whether you have a question or just want to say hi, feel free to reach out!",
+    "email": "Send an Email"
+  },
+  "footer": {
+    "copyright": "© {year} mfpmartins.dev"
+  },
+  "notFound": {
+    "message": "Looks like you've fallen into a black hole. Let's get you back to the",
+    "link": "home page"
+  }
+}

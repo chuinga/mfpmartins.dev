@@ -1,22 +1,3 @@
-# S3 bucket for access logs
-resource "aws_s3_bucket" "logs" {
-  bucket = "mfpmartins-dev-logs"
-}
-
-resource "aws_s3_bucket_ownership_controls" "logs" {
-  bucket = aws_s3_bucket.logs.id
-
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
-}
-
-resource "aws_s3_bucket_acl" "logs" {
-  depends_on = [aws_s3_bucket_ownership_controls.logs]
-  bucket     = aws_s3_bucket.logs.id
-  acl        = "private"
-}
-
 # S3 bucket for static site hosting
 resource "aws_s3_bucket" "website" {
   bucket = "mfpmartins-dev-website"
@@ -63,12 +44,6 @@ resource "aws_cloudfront_distribution" "website" {
   is_ipv6_enabled     = true
   default_root_object = "index.html"
   price_class         = "PriceClass_100"
-
-  logging_config {
-    include_cookies = false
-    bucket          = aws_s3_bucket.logs.bucket_domain_name
-    prefix          = "cloudfront/"
-  }
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]

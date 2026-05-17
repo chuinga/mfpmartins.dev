@@ -25,6 +25,9 @@ provider "aws" {
       Project     = "mfpmartins-dev"
       ManagedBy   = "terraform"
       Environment = "production"
+      Owner       = "Miguel"
+      CostCenter  = "personal"
+      Repository  = "chuinga/mfpmartins.dev"
     }
   }
 }

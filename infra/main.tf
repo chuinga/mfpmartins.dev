@@ -1,6 +1,77 @@
+# S3 bucket for CloudFront access logs
+resource "aws_s3_bucket" "logs" {
+  bucket = "mfpmartins-dev-logs"
+
+  tags = {
+    Name    = "mfpmartins-dev-logs"
+    Purpose = "cloudfront-access-logs"
+  }
+}
+
+resource "aws_s3_bucket_ownership_controls" "logs" {
+  bucket = aws_s3_bucket.logs.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "logs" {
+  bucket = aws_s3_bucket.logs.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+# Grant CloudFront permission to write logs
+resource "aws_s3_bucket_policy" "logs" {
+  bucket = aws_s3_bucket.logs.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "AllowCloudFrontLogs"
+        Effect    = "Allow"
+        Principal = {
+          Service = "delivery.logs.amazonaws.com"
+        }
+        Action   = "s3:PutObject"
+        Resource = "${aws_s3_bucket.logs.arn}/cloudfront/*"
+        Condition = {
+          StringEquals = {
+            "aws:SourceAccount" = "058264503354"
+          }
+        }
+      },
+      {
+        Sid       = "AllowCloudFrontACLCheck"
+        Effect    = "Allow"
+        Principal = {
+          Service = "delivery.logs.amazonaws.com"
+        }
+        Action   = "s3:GetBucketAcl"
+        Resource = aws_s3_bucket.logs.arn
+        Condition = {
+          StringEquals = {
+            "aws:SourceAccount" = "058264503354"
+          }
+        }
+      }
+    ]
+  })
+}
+
 # S3 bucket for static site hosting
 resource "aws_s3_bucket" "website" {
   bucket = "mfpmartins-dev-website"
+
+  tags = {
+    Name    = "mfpmartins-dev-website"
+    Purpose = "static-site-hosting"
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "website" {
@@ -45,6 +116,14 @@ resource "aws_cloudfront_distribution" "website" {
   default_root_object = "index.html"
   price_class         = "PriceClass_100"
 
+  logging_config {
+    include_cookies = false
+    bucket          = aws_s3_bucket.logs.bucket_domain_name
+    prefix          = "cloudfront/"
+  }
+
+  aliases = ["mfpmartins.dev", "www.mfpmartins.dev"]
+
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
@@ -83,8 +162,6 @@ resource "aws_cloudfront_distribution" "website" {
     }
   }
 
-  aliases = ["mfpmartins.dev", "www.mfpmartins.dev"]
-
   viewer_certificate {
     acm_certificate_arn      = "arn:aws:acm:us-east-1:058264503354:certificate/a398f85c-00a7-4444-99fa-c8a35e02b1dd"
     ssl_support_method       = "sni-only"
@@ -92,7 +169,8 @@ resource "aws_cloudfront_distribution" "website" {
   }
 
   tags = {
-    Name = "mfpmartins-dev-cdn"
+    Name    = "mfpmartins-dev-cdn"
+    Purpose = "content-delivery"
   }
 }
 
@@ -115,6 +193,65 @@ resource "aws_s3_bucket_policy" "website" {
           StringEquals = {
             "AWS:SourceArn" = aws_cloudfront_distribution.website.arn
           }
+        }
+      }
+    ]
+  })
+}
+
+# CloudWatch dashboard for monitoring
+resource "aws_cloudwatch_dashboard" "website" {
+  dashboard_name = "mfpmartins-dev"
+
+  dashboard_body = jsonencode({
+    widgets = [
+      {
+        type   = "metric"
+        x      = 0
+        y      = 0
+        width  = 12
+        height = 6
+        properties = {
+          metrics = [
+            ["AWS/CloudFront", "Requests", "DistributionId", aws_cloudfront_distribution.website.id, "Region", "Global"]
+          ]
+          period = 300
+          stat   = "Sum"
+          region = "us-east-1"
+          title  = "Total Requests"
+        }
+      },
+      {
+        type   = "metric"
+        x      = 12
+        y      = 0
+        width  = 12
+        height = 6
+        properties = {
+          metrics = [
+            ["AWS/CloudFront", "BytesDownloaded", "DistributionId", aws_cloudfront_distribution.website.id, "Region", "Global"]
+          ]
+          period = 300
+          stat   = "Sum"
+          region = "us-east-1"
+          title  = "Bytes Downloaded"
+        }
+      },
+      {
+        type   = "metric"
+        x      = 0
+        y      = 6
+        width  = 12
+        height = 6
+        properties = {
+          metrics = [
+            ["AWS/CloudFront", "4xxErrorRate", "DistributionId", aws_cloudfront_distribution.website.id, "Region", "Global"],
+            ["AWS/CloudFront", "5xxErrorRate", "DistributionId", aws_cloudfront_distribution.website.id, "Region", "Global"]
+          ]
+          period = 300
+          stat   = "Average"
+          region = "us-east-1"
+          title  = "Error Rates"
         }
       }
     ]

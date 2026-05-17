@@ -15,9 +15,9 @@ export const projects: Project[] = [
     title: 'mfpmartins.dev',
     descriptionKey: 'mfpmartins_description',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Three.js', 'Framer Motion', 'AWS Amplify', 'Terraform'],
-    siteUrl: 'https://main.d2dwwqpvbzqcdg.amplifyapp.com',
+    siteUrl: 'https://d3jxiihenswfnk.cloudfront.net',
     githubUrl: 'https://github.com/chuinga/mfpmartins.dev',
-    embedUrl: 'https://main.d2dwwqpvbzqcdg.amplifyapp.com',
+    embedUrl: 'https://d3jxiihenswfnk.cloudfront.net',
   },
   {
     slug: 'setubal',

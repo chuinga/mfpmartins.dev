@@ -16,52 +16,20 @@ resource "aws_s3_bucket_ownership_controls" "logs" {
   }
 }
 
+resource "aws_s3_bucket_acl" "logs" {
+  depends_on = [aws_s3_bucket_ownership_controls.logs]
+  bucket     = aws_s3_bucket.logs.id
+  acl        = "log-delivery-write"
+}
+
 resource "aws_s3_bucket_public_access_block" "logs" {
-  bucket = aws_s3_bucket.logs.id
+  depends_on = [aws_s3_bucket_acl.logs]
+  bucket     = aws_s3_bucket.logs.id
 
   block_public_acls       = true
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
-}
-
-# Grant CloudFront permission to write logs
-resource "aws_s3_bucket_policy" "logs" {
-  bucket = aws_s3_bucket.logs.id
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid       = "AllowCloudFrontLogs"
-        Effect    = "Allow"
-        Principal = {
-          Service = "delivery.logs.amazonaws.com"
-        }
-        Action   = "s3:PutObject"
-        Resource = "${aws_s3_bucket.logs.arn}/cloudfront/*"
-        Condition = {
-          StringEquals = {
-            "aws:SourceAccount" = "058264503354"
-          }
-        }
-      },
-      {
-        Sid       = "AllowCloudFrontACLCheck"
-        Effect    = "Allow"
-        Principal = {
-          Service = "delivery.logs.amazonaws.com"
-        }
-        Action   = "s3:GetBucketAcl"
-        Resource = aws_s3_bucket.logs.arn
-        Condition = {
-          StringEquals = {
-            "aws:SourceAccount" = "058264503354"
-          }
-        }
-      }
-    ]
-  })
 }
 
 # S3 bucket for static site hosting
@@ -105,6 +73,8 @@ resource "aws_cloudfront_origin_access_control" "website" {
 
 # CloudFront distribution
 resource "aws_cloudfront_distribution" "website" {
+  depends_on = [aws_s3_bucket_acl.logs]
+
   origin {
     domain_name              = aws_s3_bucket.website.bucket_regional_domain_name
     origin_id                = "S3-mfpmartins-dev"

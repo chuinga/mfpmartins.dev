@@ -98,7 +98,7 @@ resource "aws_cloudfront_response_headers_policy" "security" {
     }
 
     frame_options {
-      frame_option = "SAMEORIGIN"
+      frame_option = "DENY"
       override     = true
     }
 
@@ -115,11 +115,11 @@ resource "aws_cloudfront_response_headers_policy" "security" {
         "img-src 'self' data: blob:",
         "font-src 'self' data:",
         "connect-src 'self'",
-        "frame-src https://mfpmartins.dev https://setubal.vercel.app https://groovegrid.netlify.app https://pawsitivehomes.netlify.app https://gravitygame.netlify.app",
+        "frame-src https://setubal.vercel.app https://groovegrid.netlify.app https://pawsitivehomes.netlify.app https://gravitygame.netlify.app",
         "object-src 'none'",
         "base-uri 'self'",
         "form-action 'self'",
-        "frame-ancestors 'self'",
+        "frame-ancestors 'none'",
       ])
       override = true
     }

@@ -38,7 +38,11 @@ data "aws_iam_policy_document" "github_trust" {
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${local.github_repo}:ref:refs/heads/main"]
+      values = [
+        "repo:${local.github_repo}:ref:refs/heads/main",
+        # Jobs that use the protected `production` environment (manual approval) get this subject
+        "repo:${local.github_repo}:environment:production",
+      ]
     }
   }
 }

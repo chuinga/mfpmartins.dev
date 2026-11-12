@@ -107,6 +107,7 @@ jobs:
         with:
           name: tfplan
           path: infra/tfplan
+          retention-days: 1
 
   # Step 4: Terraform deploy
   terraform-deploy:

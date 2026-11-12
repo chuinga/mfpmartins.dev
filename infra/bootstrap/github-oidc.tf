@@ -109,6 +109,27 @@ data "aws_iam_policy_document" "github_deploy" {
     ]
   }
 
+  # CloudFront function and response headers policy managed by Terraform
+  statement {
+    sid    = "CloudFrontFunctionAndHeaders"
+    effect = "Allow"
+    actions = [
+      "cloudfront:CreateFunction",
+      "cloudfront:UpdateFunction",
+      "cloudfront:PublishFunction",
+      "cloudfront:DeleteFunction",
+      "cloudfront:DescribeFunction",
+      "cloudfront:TestFunction",
+      "cloudfront:CreateResponseHeadersPolicy",
+      "cloudfront:UpdateResponseHeadersPolicy",
+      "cloudfront:DeleteResponseHeadersPolicy",
+    ]
+    resources = [
+      "arn:aws:cloudfront::${local.account_id}:function/mfpmartins-dev-*",
+      "arn:aws:cloudfront::${local.account_id}:response-headers-policy/*",
+    ]
+  }
+
   # CloudWatch dashboard managed by Terraform
   statement {
     sid       = "DashboardWrite"

@@ -17,7 +17,8 @@ export const projects: Project[] = [
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Three.js', 'Framer Motion', 'AWS Amplify', 'Terraform'],
     siteUrl: 'https://mfpmartins.dev',
     githubUrl: 'https://github.com/chuinga/mfpmartins.dev',
-    embedUrl: 'https://mfpmartins.dev',
+    // Not embedded: a sandboxed copy of this site cannot run without allow-same-origin
+    screenshotPath: '/images/projects/browserMfpmartins.png',
   },
   {
     slug: 'setubal',

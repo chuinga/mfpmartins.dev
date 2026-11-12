@@ -71,6 +71,69 @@ resource "aws_cloudfront_origin_access_control" "website" {
   signing_protocol                  = "sigv4"
 }
 
+# Viewer-request function: www -> apex redirect and extensionless path rewrite
+resource "aws_cloudfront_function" "viewer_request" {
+  name    = "mfpmartins-dev-viewer-request"
+  runtime = "cloudfront-js-2.0"
+  comment = "Redirect www to apex and map /path to /path.html"
+  publish = true
+  code    = file("${path.module}/functions/viewer-request.js")
+}
+
+# Security response headers
+resource "aws_cloudfront_response_headers_policy" "security" {
+  name    = "mfpmartins-dev-security-headers"
+  comment = "HSTS, CSP, framing, referrer and permissions policies"
+
+  security_headers_config {
+    strict_transport_security {
+      access_control_max_age_sec = 31536000
+      include_subdomains         = true
+      preload                    = false
+      override                   = true
+    }
+
+    content_type_options {
+      override = true
+    }
+
+    frame_options {
+      frame_option = "DENY"
+      override     = true
+    }
+
+    referrer_policy {
+      referrer_policy = "strict-origin-when-cross-origin"
+      override        = true
+    }
+
+    content_security_policy {
+      content_security_policy = join("; ", [
+        "default-src 'self'",
+        "script-src 'self' 'unsafe-inline'",
+        "style-src 'self' 'unsafe-inline'",
+        "img-src 'self' data: blob:",
+        "font-src 'self' data:",
+        "connect-src 'self'",
+        "frame-src https://setubal.vercel.app https://groovegrid.netlify.app https://pawsitivehomes.netlify.app https://gravitygame.netlify.app",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+        "frame-ancestors 'none'",
+      ])
+      override = true
+    }
+  }
+
+  custom_headers_config {
+    items {
+      header   = "Permissions-Policy"
+      value    = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+      override = true
+    }
+  }
+}
+
 # CloudFront distribution
 resource "aws_cloudfront_distribution" "website" {
   depends_on = [aws_s3_bucket_acl.logs]
@@ -106,24 +169,32 @@ resource "aws_cloudfront_distribution" "website" {
       }
     }
 
-    viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
-    compress               = true
+    viewer_protocol_policy     = "redirect-to-https"
+    min_ttl                    = 0
+    default_ttl                = 3600
+    max_ttl                    = 86400
+    compress                   = true
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.security.id
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.viewer_request.arn
+    }
   }
 
-  # SPA routing: serve index.html for 404s (client-side routing)
+  # S3 returns 403 (not 404) for missing keys behind OAC. Return a real 404 status.
   custom_error_response {
-    error_code         = 403
-    response_code      = 200
-    response_page_path = "/index.html"
+    error_code            = 403
+    response_code         = 404
+    response_page_path    = "/404.html"
+    error_caching_min_ttl = 60
   }
 
   custom_error_response {
-    error_code         = 404
-    response_code      = 200
-    response_page_path = "/404.html"
+    error_code            = 404
+    response_code         = 404
+    response_page_path    = "/404.html"
+    error_caching_min_ttl = 60
   }
 
   restrictions {

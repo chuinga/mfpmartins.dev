@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { type Project } from '@/content/project-data'
 import { useTranslations } from '@/lib/LocaleContext'
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
@@ -38,8 +39,17 @@ export function ProjectDetail({ project }: ProjectDetailProps): React.ReactNode 
               }}
               loading="lazy"
               sandbox="allow-scripts allow-same-origin"
+              referrerPolicy="no-referrer"
             />
           </div>
+        ) : project.screenshotPath ? (
+          <Image
+            src={project.screenshotPath}
+            alt={`${project.title} preview`}
+            width={1280}
+            height={720}
+            className="w-full h-auto"
+          />
         ) : (
           <div className="flex items-center justify-center h-64 bg-card-bg">
             <p className="text-description text-sm">Preview not available</p>

@@ -33,6 +33,20 @@ function handler(event) {
     return request;
   }
 
+  // Next.js 16 static export bug (vercel/next.js#85374): the export writes
+  // /about/__next.about/__PAGE__.txt but the client requests
+  // /about/__next.about.__PAGE__.txt. Map the dotted name back to the nested path.
+  var segments = uri.split('/');
+  var file = segments[segments.length - 1];
+  if (file.indexOf('__next.') === 0 && file.slice(-4) === '.txt') {
+    var parts = file.slice(7, -4).split('.');
+    if (parts.length >= 2) {
+      segments[segments.length - 1] = '__next.' + parts[0] + '/' + parts.slice(1).join('/') + '.txt';
+      request.uri = segments.join('/');
+      return request;
+    }
+  }
+
   if (uri.charAt(uri.length - 1) === '/') {
     uri = uri.slice(0, -1);
   }

@@ -3,6 +3,9 @@ name: Deploy Pipeline
 on:
   push:
     branches: [main]
+  # Pull requests only run validation and scans (no AWS access)
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
@@ -69,11 +72,37 @@ jobs:
           fi
           echo "No hardcoded secrets found"
 
+  # Detect whether infrastructure code changed so Terraform only runs when needed
+  changes:
+    name: Detect infra changes
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    outputs:
+      infra: ${{ steps.diff.outputs.infra }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Compare with previous commit
+        id: diff
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ -z "$BEFORE" ] || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            echo "infra=true" >> "$GITHUB_OUTPUT"
+          elif git diff --name-only "$BEFORE" "$GITHUB_SHA" | grep -q '^infra/'; then
+            echo "infra=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "infra=false" >> "$GITHUB_OUTPUT"
+          fi
+
   # Step 3: Terraform plan
   terraform-plan:
     name: Terraform Plan
     runs-on: ubuntu-latest
-    needs: [validate, preflight-sast]
+    needs: [validate, preflight-sast, changes]
+    if: github.event_name == 'push' && needs.changes.outputs.infra == 'true'
     permissions:
       id-token: write
       contents: read
@@ -114,6 +143,8 @@ jobs:
     name: Terraform Deploy
     runs-on: ubuntu-latest
     needs: terraform-plan
+    # Protected environment: requires manual approval before apply
+    environment: production
     permissions:
       id-token: write
       contents: read
@@ -149,7 +180,9 @@ jobs:
   deploy-site:
     name: Deploy to S3
     runs-on: ubuntu-latest
-    needs: [terraform-deploy]
+    needs: [validate, preflight-sast, terraform-deploy]
+    # Run on pushes even when Terraform was skipped, but never after a failure
+    if: ${{ always() && github.event_name == 'push' && needs.validate.result == 'success' && needs.preflight-sast.result == 'success' && (needs.terraform-deploy.result == 'success' || needs.terraform-deploy.result == 'skipped') }}
     permissions:
       id-token: write
       contents: read

@@ -9,6 +9,7 @@ permissions:
 
 env:
   AWS_REGION: eu-west-1
+  AWS_ROLE_ARN: arn:aws:iam::058264503354:role/mfpmartins-dev-github-deploy
   NODE_VERSION: '22'
   TERRAFORM_VERSION: '1.7'
 
@@ -69,6 +70,9 @@ jobs:
     name: Terraform Plan
     runs-on: ubuntu-latest
     needs: [validate, preflight-sast]
+    permissions:
+      id-token: write
+      contents: read
     defaults:
       run:
         working-directory: infra
@@ -82,8 +86,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Terraform Init
@@ -106,6 +109,9 @@ jobs:
     name: Terraform Deploy
     runs-on: ubuntu-latest
     needs: terraform-plan
+    permissions:
+      id-token: write
+      contents: read
     defaults:
       run:
         working-directory: infra
@@ -119,8 +125,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Terraform Init
@@ -140,12 +145,14 @@ jobs:
     name: Deploy to S3
     runs-on: ubuntu-latest
     needs: [terraform-deploy]
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Download build output

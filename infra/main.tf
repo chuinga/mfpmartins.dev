@@ -71,6 +71,15 @@ resource "aws_cloudfront_origin_access_control" "website" {
   signing_protocol                  = "sigv4"
 }
 
+# Viewer-request function: www -> apex redirect and extensionless path rewrite
+resource "aws_cloudfront_function" "viewer_request" {
+  name    = "mfpmartins-dev-viewer-request"
+  runtime = "cloudfront-js-2.0"
+  comment = "Redirect www to apex and map /path to /path.html"
+  publish = true
+  code    = file("${path.module}/functions/viewer-request.js")
+}
+
 # Security response headers
 resource "aws_cloudfront_response_headers_policy" "security" {
   name    = "mfpmartins-dev-security-headers"
@@ -166,19 +175,26 @@ resource "aws_cloudfront_distribution" "website" {
     max_ttl                    = 86400
     compress                   = true
     response_headers_policy_id = aws_cloudfront_response_headers_policy.security.id
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.viewer_request.arn
+    }
   }
 
-  # SPA routing: serve index.html for 404s (client-side routing)
+  # S3 returns 403 (not 404) for missing keys behind OAC. Return a real 404 status.
   custom_error_response {
-    error_code         = 403
-    response_code      = 200
-    response_page_path = "/index.html"
+    error_code            = 403
+    response_code         = 404
+    response_page_path    = "/404.html"
+    error_caching_min_ttl = 60
   }
 
   custom_error_response {
-    error_code         = 404
-    response_code      = 200
-    response_page_path = "/404.html"
+    error_code            = 404
+    response_code         = 404
+    response_page_path    = "/404.html"
+    error_caching_min_ttl = 60
   }
 
   restrictions {

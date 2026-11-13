@@ -130,6 +130,19 @@ data "aws_iam_policy_document" "github_deploy" {
     ]
   }
 
+  # Read-only ACM access so Terraform can look up the certificate
+  statement {
+    sid    = "AcmRead"
+    effect = "Allow"
+    actions = [
+      "acm:ListCertificates",
+      "acm:DescribeCertificate",
+      "acm:GetCertificate",
+      "acm:ListTagsForCertificate",
+    ]
+    resources = ["*"]
+  }
+
   # CloudWatch dashboard managed by Terraform
   statement {
     sid       = "DashboardWrite"

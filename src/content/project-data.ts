@@ -14,7 +14,7 @@ export const projects: Project[] = [
     slug: 'mfpmartins-dev',
     title: 'mfpmartins.dev',
     descriptionKey: 'mfpmartins_description',
-    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Three.js', 'Framer Motion', 'AWS Amplify', 'Terraform'],
+    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Three.js', 'Framer Motion', 'AWS S3', 'CloudFront', 'Terraform'],
     siteUrl: 'https://mfpmartins.dev',
     githubUrl: 'https://github.com/chuinga/mfpmartins.dev',
     // Not embedded: a sandboxed copy of this site cannot run without allow-same-origin

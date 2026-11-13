@@ -30,7 +30,9 @@ yarn-error.log*
 
 # env files
 .env
-.env*.local
+# keep a committed template possible, ignore every real env file
+.env*
+!.env.example
 
 # vercel
 .vercel

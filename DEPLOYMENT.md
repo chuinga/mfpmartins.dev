@@ -1,72 +1,74 @@
-# AWS Amplify Deployment Guide
+# Deployment
 
-## Prerequisites
+The site is a static export (`output: 'export'`) hosted on S3 behind CloudFront. Infrastructure is managed with Terraform and deployed by GitHub Actions.
 
-- AWS Account: `058264503354` (IAM user: Miguel)
-- GitHub repository: https://github.com/chuinga/mfpmartins.dev
-- Custom domain: mfpmartins.dev
-- Amplify App ID: `d2dwwqpvbzqcdg`
-- Default URL: https://main.d2dwwqpvbzqcdg.amplifyapp.com
+## Architecture
 
-## Setup Steps
+- **Hosting**: private S3 bucket (`mfpmartins-dev-website`), read by CloudFront through Origin Access Control.
+- **CDN**: CloudFront distribution for `mfpmartins.dev` and `www.mfpmartins.dev`, TLS 1.2+, HTTP to HTTPS redirect.
+- **Viewer-request function** (`infra/functions/viewer-request.js`): redirects `www` to the apex domain and maps extensionless paths such as `/about` to `/about.html`.
+- **Response headers policy** (`infra/main.tf`): HSTS, CSP, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, `X-Content-Type-Options`. Update the CSP `frame-src` list when adding a project embed.
+- **Errors**: S3 returns 403 for missing keys, so CloudFront maps 403 and 404 to `/404.html` with a real 404 status.
+- **Certificate**: ACM certificate in `us-east-1` for `mfpmartins.dev` and `*.mfpmartins.dev`.
+- **DNS**: managed at the domain registrar (Porkbun), not in Route 53.
+- **Logs**: CloudFront access logs go to `mfpmartins-dev-logs`.
+- **Terraform state**: S3 bucket `mfpmartins-terraform-state` with a DynamoDB lock table.
 
-### 1. Connect Repository to AWS Amplify
+## Pipeline (`.github/workflows/deploy.yml`)
 
-1. Go to AWS Amplify Console → "New app" → "Host web app"
-2. Select "GitHub" as the source provider
-3. Authorize AWS Amplify to access your GitHub account
-4. Select the repository: `chuinga/mfpmartins.dev`
-5. Select the branch: `main`
+Runs on pull requests (checks only) and on pushes to `main`.
 
-### 2. Configure Build Settings
+1. **Validate**: type-check, lint, build the static export.
+2. **Preflight SAST**: `npm audit --omit=dev --audit-level=high` and a secret scan of tracked files. Both fail the pipeline.
+3. **Detect infra changes**: Terraform only runs when files under `infra/` changed.
+4. **Terraform Plan** then **Terraform Deploy**: the apply job uses the protected `production` GitHub environment and waits for manual approval.
+5. **Deploy to S3**: syncs `out/` to the bucket and invalidates the CloudFront cache.
 
-Amplify should auto-detect the `amplify.yml` in the repo root. Verify it shows:
+Pull requests never receive AWS credentials.
 
-- Build command: `npm ci && npm run build`
-- Output directory: `.next`
-- Node.js version: 20+
+## AWS authentication
 
-If not auto-detected, the `amplify.yml` file in the repo root defines the build configuration.
+The pipeline uses GitHub OIDC and assumes the `mfpmartins-dev-github-deploy` role. There are no long-lived AWS keys in GitHub secrets. The role trusts only this repository's `main` branch and the `production` environment, and its permissions are limited to this site's resources.
 
-### 3. Deploy
+The role is defined in `infra/bootstrap/github-oidc.tf`, which is applied manually. This keeps the pipeline from editing its own permissions.
 
-Click "Save and deploy". Amplify will:
-- Clone the repo
-- Install dependencies (`npm ci`)
-- Build the Next.js app (`npm run build`)
-- Deploy to CDN
+## Branch protection
 
-### 4. Custom Domain Setup
+`main` is protected by a ruleset: no force pushes or deletion, pull requests required, and the `Validate` and `Preflight SAST` checks must pass.
 
-1. In Amplify Console → "Domain management" → "Add domain"
-2. Enter: `mfpmartins.dev`
-3. Configure subdomains:
-   - `mfpmartins.dev` → main branch
-   - `www.mfpmartins.dev` → redirect to `mfpmartins.dev`
-4. Amplify will provision an ACM certificate automatically
-5. Update DNS records as instructed:
-   - Add CNAME record for domain verification
-   - Add CNAME/ALIAS record pointing to the Amplify CloudFront distribution
+## Common tasks
 
-### 5. HTTPS & Redirects
+### Deploy a change
 
-Amplify automatically:
-- Provisions TLS certificate via ACM
-- Enables HTTPS
-- Redirects HTTP → HTTPS
-- Redirects www → apex domain (if configured)
+1. Create a branch, commit, and open a pull request.
+2. Merge once the checks pass.
+3. If `infra/` changed, approve the `production` deployment in the Actions run.
 
-### 6. CI/CD
+### Change the bootstrap resources (state bucket, locks table, OIDC role)
 
-Every push to `main` branch triggers automatic build and deploy.
+```bash
+cd infra/bootstrap
+terraform init
+terraform plan
+terraform apply
+```
 
-## Environment Variables
+Bootstrap state is stored locally and is not committed. Back it up if you move machines.
 
-Currently none required. If needed in the future, add them in:
-Amplify Console → App settings → Environment variables
+### Roll back
+
+Revert the offending commit through a pull request. The pipeline redeploys the previous content. The website bucket is not versioned, so a revert is the rollback path.
+
+### Preview locally
+
+```bash
+npm run dev      # development server at http://localhost:3000
+npm run build    # static export into out/
+```
 
 ## Troubleshooting
 
-- **Build fails**: Check Node.js version (needs 20+). Set in Amplify: App settings → Build settings → Build image settings → Node.js version
-- **404 on routes**: Amplify handles Next.js routing automatically with the SSR adapter
-- **Domain not resolving**: DNS propagation can take up to 48 hours
+- **Pipeline waits on "Terraform Deploy"**: it needs approval in the Actions run (production environment).
+- **Page returns the 404 page**: check that the file exists in the bucket (`aws s3 ls s3://mfpmartins-dev-website/ --recursive`) and invalidate the cache.
+- **Stale content**: the pipeline invalidates `/*` after every deploy, but browsers may cache for up to an hour.
+- **`terraform plan` shows unexpected changes**: someone changed the distribution outside Terraform. Re-apply from the pipeline.

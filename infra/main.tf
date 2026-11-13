@@ -51,16 +51,12 @@ resource "aws_s3_bucket_public_access_block" "website" {
   restrict_public_buckets = true
 }
 
-resource "aws_s3_bucket_website_configuration" "website" {
-  bucket = aws_s3_bucket.website.id
-
-  index_document {
-    suffix = "index.html"
-  }
-
-  error_document {
-    key = "404.html"
-  }
+# Existing ACM certificate (must be in us-east-1 for CloudFront)
+data "aws_acm_certificate" "site" {
+  provider    = aws.us_east_1
+  domain      = var.domain_name
+  statuses    = ["ISSUED"]
+  most_recent = true
 }
 
 # CloudFront Origin Access Control
@@ -155,7 +151,7 @@ resource "aws_cloudfront_distribution" "website" {
     prefix          = "cloudfront/"
   }
 
-  aliases = ["mfpmartins.dev", "www.mfpmartins.dev"]
+  aliases = [var.domain_name, "www.${var.domain_name}"]
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
@@ -204,7 +200,7 @@ resource "aws_cloudfront_distribution" "website" {
   }
 
   viewer_certificate {
-    acm_certificate_arn      = "arn:aws:acm:us-east-1:058264503354:certificate/a398f85c-00a7-4444-99fa-c8a35e02b1dd"
+    acm_certificate_arn      = data.aws_acm_certificate.site.arn
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.2_2021"
   }

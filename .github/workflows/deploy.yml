@@ -91,7 +91,7 @@ jobs:
         run: |
           if [ -z "$BEFORE" ] || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
             echo "infra=true" >> "$GITHUB_OUTPUT"
-          elif git diff --name-only "$BEFORE" "$GITHUB_SHA" | grep -q '^infra/'; then
+          elif git diff --name-only "$BEFORE" "$GITHUB_SHA" | grep -v '^infra/bootstrap/' | grep -q '^infra/'; then
             echo "infra=true" >> "$GITHUB_OUTPUT"
           else
             echo "infra=false" >> "$GITHUB_OUTPUT"
@@ -136,7 +136,7 @@ jobs:
         with:
           name: tfplan
           path: infra/tfplan
-          retention-days: 1
+          retention-days: 7
 
   # Step 4: Terraform deploy
   terraform-deploy:

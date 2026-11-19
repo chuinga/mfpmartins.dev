@@ -22,6 +22,26 @@ resource "aws_s3_bucket_acl" "logs" {
   acl        = "log-delivery-write"
 }
 
+# CloudFront logs contain visitor IPs: keep them for 90 days only
+resource "aws_s3_bucket_lifecycle_configuration" "logs" {
+  bucket = aws_s3_bucket.logs.id
+
+  rule {
+    id     = "expire-access-logs"
+    status = "Enabled"
+
+    filter {}
+
+    expiration {
+      days = 90
+    }
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 7
+    }
+  }
+}
+
 resource "aws_s3_bucket_public_access_block" "logs" {
   depends_on = [aws_s3_bucket_acl.logs]
   bucket     = aws_s3_bucket.logs.id
@@ -39,6 +59,37 @@ resource "aws_s3_bucket" "website" {
   tags = {
     Name    = "mfpmartins-dev-website"
     Purpose = "static-site-hosting"
+  }
+}
+
+# Versioning lets a bad deploy be rolled back from the bucket itself
+resource "aws_s3_bucket_versioning" "website" {
+  bucket = aws_s3_bucket.website.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "website" {
+  bucket = aws_s3_bucket.website.id
+
+  # Versioning must exist before noncurrent versions can be expired
+  depends_on = [aws_s3_bucket_versioning.website]
+
+  rule {
+    id     = "expire-noncurrent-versions"
+    status = "Enabled"
+
+    filter {}
+
+    noncurrent_version_expiration {
+      noncurrent_days = 30
+    }
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 7
+    }
   }
 }
 
